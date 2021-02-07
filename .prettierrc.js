@@ -1,4 +1,3 @@
-// .prettierrc.js
 module.exports = {
   // max 120 characters per line
   printWidth: 120,

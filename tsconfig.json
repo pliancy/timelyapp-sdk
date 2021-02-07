@@ -8,6 +8,10 @@
     "declaration": true,
     "pretty": true,
     "newLine": "lf",
+    "checkJs": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "removeComments": true,
     "stripInternal": true,
     "strict": true,
     "noImplicitReturns": true,
@@ -22,5 +26,6 @@
     "outDir": "dist",
     "lib": ["ES2019"]
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["dist"]
 }
