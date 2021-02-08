@@ -42,7 +42,8 @@ jobs:
 
       # Lint
       - name: Run Linting
-        run: npm run lint
+        uses: bradennapier/eslint-plus-action@v3.4.2
+        # run: npm run lint
 
       # Formatting
       - name: Run Formatting Checkout
