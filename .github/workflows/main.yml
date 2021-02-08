@@ -32,21 +32,21 @@ jobs:
       - name: Install NPM Packages
         run: npm ci
 
-      - name: Run Linting and Formatting
-        uses: wearerequired/lint-action@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          eslint: true
-          eslint_extensions: js,jsx,ts,tsx
-          prettier: true
+      # - name: Run Linting and Formatting
+      #   uses: wearerequired/lint-action@v1
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     eslint: true
+      #     eslint_extensions: js,jsx,ts,tsx
+      #     prettier: true
 
-      # # Lint
-      # - name: Run Linting
-      #   run: npm run lint
+      # Lint
+      - name: Run Linting
+        run: npm run lint
 
-      # # Formatting
-      # - name: Run Formatting Checkout
-      #   run: npm run format
+      # Formatting
+      - name: Run Formatting Checkout
+        run: npm run format
 
       # Tests
       - name: Run Jest Tests
