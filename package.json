@@ -11,7 +11,7 @@
     "clean": "rimraf dist coverage tmp",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "format": "prettier .",
+    "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "test": "jest",
     "test:ci": "jest --coverage",
