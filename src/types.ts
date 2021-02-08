@@ -7,6 +7,8 @@ export interface TimelyAppConfig {
   accountId: string
   /** timeout for http requests. 20000ms by default */
   timeout?: number
+  /** temporary for dev work */
+  token?: string
 }
 
 export interface TimelyAccount {
@@ -114,4 +116,14 @@ export interface TimelyUser {
     id?: number
     name?: string
   }
+}
+
+export interface TimelyLabel {
+  id?: number
+  name?: string
+  sequence?: number
+  parent_id?: number
+  emoji?: string
+  active?: boolean
+  children: TimelyLabel[]
 }

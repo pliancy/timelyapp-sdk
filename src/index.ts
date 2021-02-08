@@ -1,8 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
-import * as qs from 'querystring'
 
-import { TimelyAppConfig, TimelyAccount, TimelyClient, TimelyUser } from './types'
-export { TimelyAppConfig, TimelyAccount, TimelyClient, TimelyUser }
+import { TimelyAppConfig, TimelyAccount, TimelyClient, TimelyUser, TimelyLabel } from './types'
+export { TimelyAppConfig, TimelyAccount, TimelyClient, TimelyUser, TimelyLabel }
 
 export class TimelyApp {
   private readonly _config: TimelyAppConfig
@@ -12,9 +11,13 @@ export class TimelyApp {
   constructor(_config: TimelyAppConfig) {
     this._config = _config
     this.token = ''
+    if (_config.token) this.token = _config.token
     this._httpConfig = {
       baseURL: 'https://api.timelyapp.com/1.1',
       timeout: this._config.timeout ?? 20000,
+      headers: {
+        authorization: `Bearer ${this.token}`,
+      },
     }
   }
 
@@ -30,15 +33,13 @@ export class TimelyApp {
   }
 
   async authenticate(): Promise<void> {
-    const resp = await axios.post(
-      'https://api.timelyapp.com/1.1/oauth/token',
-      qs.stringify({
-        grant_type: 'client_credentials',
+    const resp = await axios.get('https://api.timelyapp.com/1.1/oauth/authorize', {
+      params: {
+        response_type: 'code',
         redirect_uri: 'urn:ietf:wg:oauth:2.0:oob',
         client_id: this._config.clientId,
-        client_secret: this._config.clientSecret,
-      }),
-    )
+      },
+    })
     console.dir(resp, { depth: null })
     // gotta wait for them to give me client_credentials code flow before i can finish the auth stuff
     this.token = 'averygoodaccesstoken'
@@ -59,9 +60,25 @@ export class TimelyApp {
   async getClients(): Promise<TimelyClient[]> {
     this.checkAuth()
     const { data: response }: { data: TimelyClient[] } = await this._request(
-      `/${this._config.accountId}/clients?show=all&limit=999`,
+      `/${this._config.accountId}/clients?show=all`,
     )
     return response
+  }
+
+  async getClientById(clientId: number): Promise<TimelyClient> {
+    this.checkAuth()
+    const { data: response }: { data: TimelyClient } = await this._request(
+      `/${this._config.accountId}/clients/${clientId}`,
+    )
+    return response
+  }
+
+  async getClientByName(clientName: string): Promise<TimelyClient> {
+    this.checkAuth()
+    const clients = await this.getClients()
+    const client = clients.find((c) => c.name === clientName)
+    if (!client) throw new Error(`Can't find client with name of ${clientName}`)
+    return client
   }
 
   async addClient(client: TimelyClient): Promise<TimelyClient> {
@@ -87,7 +104,9 @@ export class TimelyApp {
 
   async getUsers(): Promise<TimelyUser[]> {
     this.checkAuth()
-    const { data: response }: { data: TimelyUser[] } = await this._request(`/${this._config.accountId}/users?limit=999`)
+    const { data: response }: { data: TimelyUser[] } = await this._request(
+      `/${this._config.accountId}/users?limit=1000`,
+    )
     return response
   }
 
@@ -97,11 +116,11 @@ export class TimelyApp {
     return response
   }
 
-  async getUserByEmail(userEmail: string): Promise<TimelyUser | null> {
+  async getUserByEmail(userEmail: string): Promise<TimelyUser> {
     this.checkAuth()
     const { data: response }: { data: TimelyUser[] } = await this._request(`/${this._config.accountId}/users?limit=999`)
     const user = response.find((u) => u.email === userEmail)
-    if (!user) return null
+    if (!user) throw new Error(`Can't find user with email of ${userEmail}`)
     return user
   }
 
@@ -123,7 +142,7 @@ export class TimelyApp {
     return response
   }
 
-  async removeUserById(userId: string): Promise<{}> {
+  async removeUserById(userId: number): Promise<{}> {
     this.checkAuth()
     const { data: response }: { data: {} } = await this._request(`/${this._config.accountId}/users/${userId}`, {
       method: 'DELETE',
@@ -135,9 +154,42 @@ export class TimelyApp {
     this.checkAuth()
     const user = await this.getUserByEmail(userEmail)
     if (!user) throw new Error(`failed to find user with email: ${userEmail}`)
-    const { data: response }: { data: {} } = await this._request(
-      `/${this._config.accountId}/users/${user.id as number}`,
-      { method: 'DELETE' },
+    const response = await this.removeUserById(user.id as number)
+    return response
+  }
+
+  async getLabels(): Promise<TimelyLabel[]> {
+    this.checkAuth()
+    const { data: response }: { data: TimelyLabel[] } = await this._request(`/${this._config.accountId}/labels`)
+    return response
+  }
+
+  async getLabelById(labelId: number): Promise<TimelyLabel> {
+    this.checkAuth()
+    const { data: response }: { data: TimelyLabel } = await this._request(
+      `/${this._config.accountId}/labels/${labelId}`,
+    )
+    return response
+  }
+
+  async updateLabelById(labelId: number, label: TimelyLabel): Promise<TimelyLabel> {
+    this.checkAuth()
+    const { data: response }: { data: TimelyLabel } = await this._request(
+      `/${this._config.accountId}/labels/${labelId}`,
+      {
+        method: 'PUT',
+        data: label,
+      },
+    )
+    return response
+  }
+
+  async getEventsByProjectId(projectId: number, start?: string, end?: string): Promise<any[]> {
+    this.checkAuth()
+    const { data: response }: { data: any[] } = await this._request(
+      `/${this._config.accountId}/projects/${projectId}/events${start ? `?since=${start}` : ''}${
+        end ? `&upto=${end}` : ''
+      }`,
     )
     return response
   }
