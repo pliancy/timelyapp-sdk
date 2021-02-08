@@ -1,11 +1,11 @@
 export interface TimelyAppConfig {
-  /* Oauth client_id from timely */
+  /** Oauth client_id from timely */
   clientId: string
-  /* Oauth client secret from timely */
+  /** Oauth client secret from timely */
   clientSecret: string
-  /* account id of timely account */
+  /** account id of your timely company account */
   accountId: string
-  /* timeout for http requests. 20000ms by default */
+  /** timeout for http requests. 20000ms by default */
   timeout?: number
 }
 

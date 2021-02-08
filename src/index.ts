@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import * as qs from 'querystring'
 
 import { TimelyAppConfig, TimelyAccount, TimelyClient, TimelyUser } from './types'
+export { TimelyAppConfig, TimelyAccount, TimelyClient, TimelyUser }
 
 export class TimelyApp {
   private readonly _config: TimelyAppConfig

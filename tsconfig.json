@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2019", // Node.js 12
-    "module": "commonjs",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "jsx": "react",
@@ -23,8 +23,9 @@
     "useDefineForClassFields": false,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "outDir": "dist",
+    "outDir": "./dist",
     "lib": ["ES2019"]
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["**/*.test.ts", "**/*.spec.ts", "**/*.test.js", "**/*.test.js"]
 }
