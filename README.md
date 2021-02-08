@@ -6,7 +6,7 @@ A typed node module which provides a wrapper and several convienence functions f
 [![npm](https://img.shields.io/npm/v/timelyapp.svg)](https://www.npmjs.com/package/timelyapp)
 [![Downloads](https://img.shields.io/npm/dm/timelyapp.svg)](https://npmjs.com/timelyapp)
 [![Dependency Status](https://img.shields.io/david/pliancy/timelyapp-sdk)](https://david-dm.org/pliancy/timelyapp-sdk)
-[![License](https://img.shields.io/npm/l/timelyapp.svg)](https://www.npmjs.com/package/timelyapp)
+[![License](https://img.shields.io/github/license/pliancy/timelyapp-sdk)](https://www.npmjs.com/package/timelyapp)
 
 ## Installation
 
