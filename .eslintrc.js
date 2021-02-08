@@ -1,6 +1,13 @@
 module.exports = {
   root: true,
-  extends: ['standard-with-typescript', 'prettier', 'prettier/@typescript-eslint', 'plugin:prettier/recommended'],
+  extends: [
+    'standard-with-typescript',
+    'plugin:jest/recommended',
+    'plugin:jest/style',
+    'prettier',
+    'prettier/@typescript-eslint',
+    'plugin:prettier/recommended',
+  ],
   plugins: ['@typescript-eslint'],
   env: {
     browser: true,
