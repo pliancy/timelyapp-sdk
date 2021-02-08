@@ -14,7 +14,6 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.eslint.json',
   },
-  ignorePatterns: ['.eslintrc.js', 'dist/**/*'],
   rules: {
     '@typescript-eslint/strict-boolean-expressions': 0,
   },

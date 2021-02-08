@@ -5,6 +5,8 @@ export interface TimelyAppConfig {
   clientSecret: string
   /* account id of timely account */
   accountId: string
+  /* timeout for http requests. 20000ms by default */
+  timeout?: number
 }
 
 export interface TimelyAccount {

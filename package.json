@@ -59,5 +59,9 @@
     "*.${js,jsx,ts,tsx,json}": [
       "prettier --write"
     ]
+  },
+  "np": {
+    "yarn": false,
+    "branch": "main"
   }
 }
