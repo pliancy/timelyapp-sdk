@@ -17,6 +17,7 @@
     "test:ci": "jest --coverage",
     "test:watch": "jest --watch",
     "build": "npm run clean && npm run lint:fix && npm run format:fix && tsc",
+    "build:ci": "tsc",
     "build:check": "tsc --noEmit",
     "build:watch": "npm run clean && tsc -w",
     "prepublishOnly": "npm run build"
