@@ -1,14 +1,10 @@
 export interface TimelyAppConfig {
-  /** Oauth client_id from timely */
-  clientId: string
-  /** Oauth client secret from timely */
-  clientSecret: string
+  /** temporary for dev work */
+  token: string
   /** account id of your timely company account */
   accountId: string
   /** timeout for http requests. 20000ms by default */
   timeout?: number
-  /** temporary for dev work */
-  token?: string
 }
 
 export interface TimelyAccount {

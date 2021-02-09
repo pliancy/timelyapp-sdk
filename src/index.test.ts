@@ -4,8 +4,7 @@ describe('TimelyApp class', () => {
   it('creates a TimelyApp instance', () => {
     const timely = new TimelyApp({
       accountId: '1234',
-      clientId: 'aaa',
-      clientSecret: 'bbb',
+      token: 'asdf',
     })
 
     expect(timely).toBeInstanceOf(TimelyApp)
