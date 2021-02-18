@@ -148,12 +148,56 @@ export class TimelyApp {
     return response
   }
 
-  async getEventsByProjectId(projectId: number, start?: string, end?: string): Promise<any[]> {
+  async getAllEvents(start: string, end: string): Promise<any[]> {
+    const { data: response }: { data: any[] } = await this._request(`/${this._config.accountId}/reports/filter.json`, {
+      method: 'POST',
+      data: {
+        project_ids: '',
+        user_ids: '',
+        team_ids: '',
+        label_ids: '',
+        since: start,
+        until: end,
+        scope: 'events',
+        limit: 9999,
+        page: 1,
+        select: 'all',
+        sort: 'day',
+        order: 'desc',
+        published: true,
+      },
+    })
+    return response
+  }
+
+  async getEventsByProjectId(projectId: number, start: string, end: string): Promise<any[]> {
     const { data: response }: { data: any[] } = await this._request(
       `/${this._config.accountId}/projects/${projectId}/events${start ? `?since=${start}` : ''}${
         end ? `&upto=${end}` : ''
       }`,
     )
+    return response
+  }
+
+  /**
+   *
+   * @param updateArray
+   *  example minimum keys for updateArray
+   * [
+   *   { id: 123456760, billed: true, label_ids: [], project_id: 1234567 },
+   *   { id: 123456761, billed: true, label_ids: [], project_id: 1234567 },
+   *   { id: 123456762, billed: true, label_ids: [], project_id: 1234567 },
+   *   { id: 123456763, billed: true, label_ids: [], project_id: 1234567 },
+   *   { id: 123456764, billed: true, label_ids: [], project_id: 1234567 },
+   * ]
+   */
+  async bulkUpdateEvents(updateArray: any[]): Promise<any[]> {
+    const { data: response }: { data: any[] } = await this._request(`/${this._config.accountId}/bulk/hours`, {
+      method: 'POST',
+      data: {
+        update: updateArray,
+      },
+    })
     return response
   }
 }
