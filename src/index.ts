@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
-import { TimelyAppConfig, TimelyAccount, TimelyClient, TimelyUser, TimelyLabel } from './types'
-export { TimelyAppConfig, TimelyAccount, TimelyClient, TimelyUser, TimelyLabel }
+import { TimelyAppConfig, TimelyAccount, TimelyClient, TimelyUser, TimelyLabel, TimelyProject } from './types'
+export { TimelyAppConfig, TimelyAccount, TimelyClient, TimelyUser, TimelyLabel, TimelyProject }
 
 export class TimelyApp {
   private readonly _config: TimelyAppConfig
@@ -198,6 +198,44 @@ export class TimelyApp {
         update: updateArray,
       },
     })
+    return response
+  }
+
+  async getProjects(): Promise<TimelyProject[]> {
+    const { data: response }: { data: TimelyProject[] } = await this._request(`/${this._config.accountId}/projects`)
+    return response
+  }
+
+  async getProjectById(projectId: number): Promise<TimelyProject> {
+    const { data: response }: { data: TimelyProject } = await this._request(
+      `/${this._config.accountId}/projects/${projectId}`,
+    )
+    return response
+  }
+
+  async addProject(project: TimelyProject): Promise<TimelyProject> {
+    const { data: response }: { data: TimelyProject } = await this._request(`/${this._config.accountId}/projects`, {
+      method: 'POST',
+      data: project,
+    })
+    return response
+  }
+
+  async removeProjectById(projectId: number): Promise<{}> {
+    const { data: response }: { data: {} } = await this._request(`/${this._config.accountId}/projects/${projectId}`, {
+      method: 'DELETE',
+    })
+    return response
+  }
+
+  async updateProjectById(projectId: number, project: TimelyProject): Promise<TimelyProject> {
+    const { data: response }: { data: TimelyProject } = await this._request(
+      `/${this._config.accountId}/projects/${projectId}`,
+      {
+        method: 'PUT',
+        data: project,
+      },
+    )
     return response
   }
 }

@@ -123,3 +123,76 @@ export interface TimelyLabel {
   active?: boolean
   children: TimelyLabel[]
 }
+
+export interface TimelyProject {
+  id: number
+  active: boolean
+  account_id: number
+  name: string
+  color: string
+  rate_type: string
+  billable: boolean
+  updated_at: number
+  external_id: string
+  budget_scope: any
+  client: TimelyClient
+  required_notes?: boolean
+  budget_expired_on?: any
+  has_recurrence?: boolean
+  enable_labels?: string
+  budget?: number
+  budget_type?: string
+  hour_rate?: number
+  hour_rate_in_cents?: number
+  budget_progress?: number
+  budget_percent?: number
+  users?: TimelyProjectUser[]
+  labels?: TimelyProjectLabel[]
+  label_ids?: number[]
+  required_label_ids?: number[]
+  cost?: TimelyProjectCost
+  estimated_cost?: TimelyProjectCost
+  duration?: TimelyProjectDuration
+  estimated_duration?: TimelyProjectDuration
+  billed_cost?: TimelyProjectCost
+  billed_duration?: TimelyProjectDuration
+  unbilled_cost?: TimelyProjectCost
+  unbilled_duration?: TimelyProjectDuration
+}
+export interface TimelyProjectDuration {
+  hours: number
+  minutes: number
+  seconds: number
+  formatted: string
+  total_hours: number
+  total_seconds: number
+  total_minutes: number
+}
+export interface TimelyProjectCost {
+  fractional: number
+  formatted: string
+  amount: number
+}
+export interface TimelyProjectUser {
+  user_id: number
+  hour_rate: number
+  hour_rate_in_cents: number
+  updated_at: string
+  created_at: string
+  deleted: boolean
+}
+export interface TimelyProjectClient {
+  id: number
+  name: string
+  active: boolean
+  external_id: string
+  updated_at: string
+}
+
+export interface TimelyProjectLabel {
+  project_id: number
+  label_id: number
+  budget: number
+  required: Boolean
+  updated_at?: Date | string
+}
