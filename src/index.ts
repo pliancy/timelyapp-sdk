@@ -216,7 +216,7 @@ export class TimelyApp {
   async addProject(project: TimelyProject): Promise<TimelyProject> {
     const { data: response }: { data: TimelyProject } = await this._request(`/${this._config.accountId}/projects`, {
       method: 'POST',
-      data: project,
+      data: { project: project },
     })
     return response
   }

@@ -132,10 +132,11 @@ export interface TimelyProject {
   color: string
   rate_type: string
   billable: boolean
-  updated_at: number
+  updated_at?: number
   external_id: string
   budget_scope: any
   client: TimelyClient
+  client_id?: number
   required_notes?: boolean
   budget_expired_on?: any
   has_recurrence?: boolean
@@ -177,8 +178,8 @@ export interface TimelyProjectUser {
   user_id: number
   hour_rate: number
   hour_rate_in_cents: number
-  updated_at: string
-  created_at: string
+  updated_at?: string
+  created_at?: string
   deleted: boolean
 }
 export interface TimelyProjectClient {
@@ -186,7 +187,7 @@ export interface TimelyProjectClient {
   name: string
   active: boolean
   external_id: string
-  updated_at: string
+  updated_at?: string
 }
 
 export interface TimelyProjectLabel {
