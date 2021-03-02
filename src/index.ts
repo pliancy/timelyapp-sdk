@@ -1,7 +1,15 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
-import { TimelyAppConfig, TimelyAccount, TimelyClient, TimelyUser, TimelyLabel, TimelyProject } from './types'
-export { TimelyAppConfig, TimelyAccount, TimelyClient, TimelyUser, TimelyLabel, TimelyProject }
+import {
+  TimelyAppConfig,
+  TimelyAccount,
+  TimelyClient,
+  TimelyUser,
+  TimelyLabel,
+  TimelyProject,
+  AddTimelyProject,
+} from './types'
+export { TimelyAppConfig, TimelyAccount, TimelyClient, TimelyUser, TimelyLabel, TimelyProject, AddTimelyProject }
 
 export class TimelyApp {
   private readonly _config: TimelyAppConfig
@@ -213,7 +221,7 @@ export class TimelyApp {
     return response
   }
 
-  async addProject(project: TimelyProject): Promise<TimelyProject> {
+  async addProject(project: AddTimelyProject): Promise<TimelyProject> {
     const { data: response }: { data: TimelyProject } = await this._request(`/${this._config.accountId}/projects`, {
       method: 'POST',
       data: { project: project },

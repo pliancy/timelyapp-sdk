@@ -130,35 +130,35 @@ export interface TimelyProject {
   account_id: number
   name: string
   color: string
-  rate_type: string
-  billable: boolean
+  rate_type?: string
+  billable?: boolean
   updated_at?: number
-  external_id: string
+  external_id?: string
   budget_scope: any
   client: TimelyClient
   client_id?: number
   required_notes?: boolean
   budget_expired_on?: any
   has_recurrence?: boolean
-  enable_labels?: string
+  enable_labels?: 'all' | 'none' | 'custom'
   budget?: number
-  budget_type?: string
+  budget_type: string
   hour_rate?: number
-  hour_rate_in_cents?: number
-  budget_progress?: number
-  budget_percent?: number
-  users?: TimelyProjectUser[]
-  labels?: TimelyProjectLabel[]
-  label_ids?: number[]
-  required_label_ids?: number[]
-  cost?: TimelyProjectCost
-  estimated_cost?: TimelyProjectCost
-  duration?: TimelyProjectDuration
-  estimated_duration?: TimelyProjectDuration
-  billed_cost?: TimelyProjectCost
-  billed_duration?: TimelyProjectDuration
-  unbilled_cost?: TimelyProjectCost
-  unbilled_duration?: TimelyProjectDuration
+  hour_rate_in_cents: number
+  budget_progress: number
+  budget_percent: number
+  users: TimelyProjectUser[]
+  labels: TimelyProjectLabel[]
+  label_ids: number[]
+  required_label_ids: number[]
+  cost: TimelyProjectCost
+  estimated_cost: TimelyProjectCost
+  duration: TimelyProjectDuration
+  estimated_duration: TimelyProjectDuration
+  billed_cost: TimelyProjectCost
+  billed_duration: TimelyProjectDuration
+  unbilled_cost: TimelyProjectCost
+  unbilled_duration: TimelyProjectDuration
 }
 export interface TimelyProjectDuration {
   hours: number
@@ -196,4 +196,25 @@ export interface TimelyProjectLabel {
   budget: number
   required: Boolean
   updated_at?: Date | string
+}
+
+export interface AddTimelyProject {
+  name: string
+  rate_type?: string
+  hour_rate?: number
+  active: boolean
+  deleted: boolean
+  currency_code: string
+  color: string
+  client_id: number
+  budget_type: string
+  budget?: number
+  billable?: boolean
+  external_id?: string
+  send_invite?: boolean
+  required_notes?: boolean
+  users: Array<{ user_id: number }>
+  budget_recurrence?: { recur: string; start_date: Date | string; end_date: Date | string; recur_until: Date | string }
+  labels?: [Array<{ label_id: number; required: boolean }>]
+  enable_labels?: 'all' | 'none' | 'custom'
 }
