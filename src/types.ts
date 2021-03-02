@@ -130,20 +130,19 @@ export interface TimelyProject {
   account_id: number
   name: string
   color: string
-  rate_type?: string
-  billable?: boolean
+  rate_type: string
+  billable: boolean
   updated_at?: number
-  external_id?: string
+  external_id: string
   budget_scope: any
   client: TimelyClient
-  client_id?: number
-  required_notes?: boolean
+  required_notes: boolean
   budget_expired_on?: any
-  has_recurrence?: boolean
-  enable_labels?: 'all' | 'none' | 'custom'
-  budget?: number
+  has_recurrence: boolean
+  enable_labels: 'all' | 'none' | 'custom'
+  budget: number
   budget_type: string
-  hour_rate?: number
+  hour_rate: number
   hour_rate_in_cents: number
   budget_progress: number
   budget_percent: number
