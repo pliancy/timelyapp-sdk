@@ -199,20 +199,19 @@ export interface TimelyProjectLabel {
 
 export interface AddTimelyProject {
   name: string
-  rate_type?: string
-  hour_rate?: number
   active: boolean
-  deleted: boolean
   currency_code: string
   color: string
   client_id: number
   budget_type: string
+  users: Array<{ user_id: number }>
+  rate_type?: string
+  hour_rate?: number
   budget?: number
   billable?: boolean
   external_id?: string
   send_invite?: boolean
   required_notes?: boolean
-  users: Array<{ user_id: number }>
   budget_recurrence?: { recur: string; start_date: Date | string; end_date: Date | string; recur_until: Date | string }
   labels?: [Array<{ label_id: number; required: boolean }>]
   enable_labels?: 'all' | 'none' | 'custom'
