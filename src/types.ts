@@ -250,3 +250,112 @@ export interface TimelyCapacity {
   start_date?: string
   end_date?: string
 }
+
+export interface TimelyPermission {
+  resource: string
+  permissions: Array<'create' | 'read' | 'update' | 'delete'>
+}
+
+export interface TimelyEvent {
+  id: number
+  uid: string
+  user: {
+    id: number
+    email: string
+    name: string
+    avatar: object
+    updated_at: string
+  }
+  project: {
+    id: number
+    active: boolean
+    account_id: number
+    name: string
+    color: string
+    rate_type: string
+    billable: boolean
+    updated_at: number
+    external_id: string
+    budget_scope: any
+    client: {
+      id: number
+      name: string
+      active: boolean
+      external_id: any
+      updated_at: string
+    }
+    required_notes: boolean
+    required_labels: boolean
+    budget_expired_on: string
+    has_recurrence: boolean
+    enable_labels: string
+    budget: number
+    budget_type: string
+    hour_rate: number
+    hour_rate_in_cents: number
+    budget_progress: number
+    budget_percent: number
+    invoice_by_budget: boolean
+    labels: TimelyLabel[]
+    label_ids: []
+    required_label_ids: []
+  }
+  duration: {
+    hours: number
+    minutes: number
+    seconds: number
+    formatted: string
+    total_hours: number
+    total_seconds: number
+    total_minutes: number
+  }
+  estimated_duration: {
+    hours: number
+    minutes: number
+    seconds: number
+    formatted: string
+    total_hours: number
+    total_seconds: number
+    total_minutes: number
+  }
+  cost: { fractional: number; formatted: string; amount: number }
+  estimated_cost: { fractional: number; formatted: string; amount: number }
+  day: string
+  note: string
+  sequence: number
+  estimated: boolean
+  timer_state: string
+  timer_started_on: 0
+  timer_stopped_on: 0
+  label_ids: number[]
+  user_ids: number[]
+  updated_at: number
+  created_at: number
+  created_from: string
+  updated_from: string
+  billed: boolean
+  billable: boolean
+  to: any
+  from: any
+  deleted: boolean
+  hour_rate: number
+  hour_rate_in_cents: number
+  creator_id: number
+  updater_id: number
+  external_id: any
+  entry_ids: [any]
+  suggestion_id: any
+  draft: boolean
+  manage: boolean
+  forecast_id: any
+  locked_reason: any
+  locked: boolean
+  invoice_id: any
+  timestamps: any[]
+}
+
+export interface TimelyBulkUpdateEventsReturn {
+  deleted_ids: number[]
+  created_ids: number[]
+  updated_ids: number[]
+}

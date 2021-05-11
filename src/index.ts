@@ -11,6 +11,9 @@ import {
   TimelyRole,
   TimelyUserCapacity,
   TimelyCapacity,
+  TimelyPermission,
+  TimelyEvent,
+  TimelyBulkUpdateEventsReturn,
 } from './types'
 export { TimelyAppConfig, TimelyAccount, TimelyClient, TimelyUser, TimelyLabel, TimelyProject, AddTimelyProject }
 
@@ -114,7 +117,7 @@ export class TimelyApp {
     return response
   }
 
-  async updateUserById(userId: string, user: TimelyUser): Promise<TimelyUser> {
+  async updateUserById(userId: number, user: TimelyUser): Promise<TimelyUser> {
     const { data: response }: { data: TimelyUser } = await this._request(`/${this._config.accountId}/users${userId}`, {
       method: 'PUT',
       data: user,
@@ -159,30 +162,33 @@ export class TimelyApp {
     return response
   }
 
-  async getAllEvents(start: string, end: string): Promise<any[]> {
-    const { data: response }: { data: any[] } = await this._request(`/${this._config.accountId}/reports/filter.json`, {
-      method: 'POST',
-      data: {
-        project_ids: '',
-        user_ids: '',
-        team_ids: '',
-        label_ids: '',
-        since: start,
-        until: end,
-        scope: 'events',
-        limit: 9999,
-        page: 1,
-        select: 'all',
-        sort: 'day',
-        order: 'desc',
-        published: true,
+  async getAllEvents(start: string, end: string): Promise<TimelyEvent[]> {
+    const { data: response }: { data: TimelyEvent[] } = await this._request(
+      `/${this._config.accountId}/reports/filter.json`,
+      {
+        method: 'POST',
+        data: {
+          project_ids: '',
+          user_ids: '',
+          team_ids: '',
+          label_ids: '',
+          since: start,
+          until: end,
+          scope: 'events',
+          limit: 9999,
+          page: 1,
+          select: 'all',
+          sort: 'day',
+          order: 'desc',
+          published: true,
+        },
       },
-    })
+    )
     return response
   }
 
-  async getEventsByProjectId(projectId: number, start: string, end: string): Promise<any[]> {
-    const { data: response }: { data: any[] } = await this._request(
+  async getEventsByProjectId(projectId: number, start: string, end: string): Promise<TimelyEvent[]> {
+    const { data: response }: { data: TimelyEvent[] } = await this._request(
       `/${this._config.accountId}/projects/${projectId}/events${start ? `?since=${start}` : ''}${
         end ? `&upto=${end}` : ''
       }`,
@@ -202,13 +208,16 @@ export class TimelyApp {
    *   { id: 123456764, billed: true, label_ids: [], project_id: 1234567 },
    * ]
    */
-  async bulkUpdateEvents(updateArray: any[]): Promise<any[]> {
-    const { data: response }: { data: any[] } = await this._request(`/${this._config.accountId}/bulk/hours`, {
-      method: 'POST',
-      data: {
-        update: updateArray,
+  async bulkUpdateEvents(updateArray: any[]): Promise<TimelyBulkUpdateEventsReturn[]> {
+    const { data: response }: { data: TimelyBulkUpdateEventsReturn[] } = await this._request(
+      `/${this._config.accountId}/bulk/hours`,
+      {
+        method: 'POST',
+        data: {
+          update: updateArray,
+        },
       },
-    })
+    )
     return response
   }
 
@@ -262,9 +271,23 @@ export class TimelyApp {
     return response
   }
 
-  async getUserCapacityById(userId: string): Promise<TimelyCapacity> {
+  async getUserCapacityById(userId: number): Promise<TimelyCapacity> {
     const { data: response }: { data: TimelyCapacity } = await this._request(
       `/${this._config.accountId}/users/${userId}/capacities`,
+    )
+    return response
+  }
+
+  async getUsersPermissions(): Promise<TimelyPermission[]> {
+    const { data: response }: { data: TimelyPermission[] } = await this._request(
+      `/${this._config.accountId}/users/current/permissions`,
+    )
+    return response
+  }
+
+  async getUsersPermissionsById(userId: number): Promise<TimelyPermission[]> {
+    const { data: response }: { data: TimelyPermission[] } = await this._request(
+      `/${this._config.accountId}/users/${userId}/permissions`,
     )
     return response
   }
