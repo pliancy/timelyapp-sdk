@@ -216,3 +216,37 @@ export interface AddTimelyProject {
   labels?: [Array<{ label_id: number; required: boolean }>]
   enable_labels?: 'all' | 'none' | 'custom'
 }
+
+export interface TimelyRole {
+  id: number
+  name: string
+  display_name: string
+  description: string
+  scopes: [
+    {
+      name: string
+      display_name: string
+      description: string
+      default: string
+      options: any[]
+    },
+  ]
+  default: boolean
+}
+
+export interface TimelyUserCapacity {
+  user_id: number
+  capacities: TimelyCapacity[]
+}
+
+export interface TimelyCapacity {
+  id?: number
+  weekly_capacity: number
+  daily_capacity: number
+  weekdays: string
+  total_working_days?: number
+  weekly_working_days?: number
+  current: boolean
+  start_date?: string
+  end_date?: string
+}

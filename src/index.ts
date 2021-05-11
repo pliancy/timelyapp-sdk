@@ -8,6 +8,9 @@ import {
   TimelyLabel,
   TimelyProject,
   AddTimelyProject,
+  TimelyRole,
+  TimelyUserCapacity,
+  TimelyCapacity,
 } from './types'
 export { TimelyAppConfig, TimelyAccount, TimelyClient, TimelyUser, TimelyLabel, TimelyProject, AddTimelyProject }
 
@@ -243,6 +246,25 @@ export class TimelyApp {
         method: 'PUT',
         data: project,
       },
+    )
+    return response
+  }
+
+  async getRoles(): Promise<TimelyRole[]> {
+    const { data: response }: { data: TimelyRole[] } = await this._request(`/${this._config.accountId}/roles`)
+    return response
+  }
+
+  async getUserCapacities(): Promise<TimelyUserCapacity[]> {
+    const { data: response }: { data: TimelyUserCapacity[] } = await this._request(
+      `/${this._config.accountId}/users/capacities`,
+    )
+    return response
+  }
+
+  async getUserCapacityById(userId: string): Promise<TimelyCapacity> {
+    const { data: response }: { data: TimelyCapacity } = await this._request(
+      `/${this._config.accountId}/users/${userId}/capacities`,
     )
     return response
   }
