@@ -50,10 +50,6 @@ jobs:
       - name: Run Linting
         run: yarn lint
 
-      # Formatting
-      - name: Run Formatting Checkout
-        run: yarn format
-
       # Tests
       - name: Run Jest Tests
         run: yarn test:ci
