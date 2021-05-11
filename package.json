@@ -13,7 +13,7 @@
         "test": "jest",
         "test:ci": "jest --coverage",
         "test:watch": "jest --watch",
-        "build": "yarn clean && yarn lint:fix && yarn format:fix && tsc",
+        "build": "yarn clean && yarn lint && tsc",
         "build:ci": "tsc",
         "build:check": "tsc --noEmit",
         "build:watch": "yarn clean && tsc -w",
