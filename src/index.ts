@@ -191,7 +191,6 @@ export class TimelyApp {
         return response
     }
 
-
     async getAllEvents(start?: string, end?: string): Promise<TimelyEvent[]> {
         const { data: response }: { data: TimelyEvent[] } = await this._request(
             `/${this._config.accountId}/reports/filter.json`,
@@ -202,8 +201,8 @@ export class TimelyApp {
                     user_ids: '',
                     team_ids: '',
                     label_ids: '',
-                    since: start?? null,
-                    until: end?? null,
+                    since: start ?? null,
+                    until: end ?? null,
                     scope: 'events',
                     limit: 9999,
                     page: 1,
@@ -255,39 +254,36 @@ export class TimelyApp {
         return response
     }
 
-
-
     async bulkDeleteEvents(eventIds: number[]): Promise<TimelyBulkUpdateEventsReturn[]> {
-      const { data: response }: { data: TimelyBulkUpdateEventsReturn[] } = await this._request(
-          `/${this._config.accountId}/bulk/events`,
-          {
-              method: 'POST',
-              data: {
-                  delete: eventIds,
-              },
-          },
-      )
-      return response
-  }
+        const { data: response }: { data: TimelyBulkUpdateEventsReturn[] } = await this._request(
+            `/${this._config.accountId}/bulk/events`,
+            {
+                method: 'POST',
+                data: {
+                    delete: eventIds,
+                },
+            },
+        )
+        return response
+    }
 
-
-  async updateEventById(eventId: number, event: TimelyEvent): Promise<TimelyEvent> {
-    const { data: response }: { data: TimelyEvent } = await this._request(
-        `/${this._config.accountId}/events/${eventId}`,
-        {
-            method: 'PUT',
-            data: event,
-        },
-    )
-    return response
-}
+    async updateEventById(eventId: number, event: TimelyEvent): Promise<TimelyEvent> {
+        const { data: response }: { data: TimelyEvent } = await this._request(
+            `/${this._config.accountId}/events/${eventId}`,
+            {
+                method: 'PUT',
+                data: event,
+            },
+        )
+        return response
+    }
 
     async getEventById(eventId: number): Promise<TimelyEvent> {
-      const { data: response }: { data: TimelyEvent } = await this._request(
-          `/${this._config.accountId}/events/${eventId}`,
-      )
-      return response
-  }
+        const { data: response }: { data: TimelyEvent } = await this._request(
+            `/${this._config.accountId}/events/${eventId}`,
+        )
+        return response
+    }
 
     async getProjects(): Promise<TimelyProject[]> {
         const { data: response }: { data: TimelyProject[] } = await this._request(
