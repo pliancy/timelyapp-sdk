@@ -16,6 +16,23 @@ npm install timelyapp
 ```
 
 ## Examples
+```typescript
+import { TimelyApp } from 'timelyapp'
+import dotenv from 'dotenv'
+dotenv.config()
+
+const timely = new TimelyApp({
+    accountId: process.env.TIMELY_ACCOUNT as string,
+    token: process.env.TIMELY_TOKEN as string,
+})
+
+;(async () => {
+    const output = await timely.getClients()
+    // eslint-disable-next-line no-console
+    console.dir(output, { depth: null })
+    // eslint-disable-next-line no-console
+})().catch(console.log)
+```
 
 ### Create the client
 
@@ -32,5 +49,5 @@ const timely = new TimelyApp({
 ### Get all users
 
 ```typescript
-const users = await timely.getAllUsers()
+const users = await timely.users.getAll()
 ```
