@@ -1,11 +1,16 @@
 import { AxiosInstance } from 'axios'
-import { TimelyAppConfig, TimelyBulkUpdateEventsReturn, TimelyEvent } from '../types'
+import {
+    TimelyAppConfig,
+    TimelyBulkUpdateEventsReturn,
+    TimelyEvent,
+    TimelyEventBulkUpdate,
+} from '../types'
 
 export class Events {
     constructor(private readonly http: AxiosInstance, private readonly config: TimelyAppConfig) {}
 
     async getAll(start?: string, end?: string): Promise<TimelyEvent[]> {
-        return this.http.post(`/${this.config.accountId}/reports/filter.json`, {
+        const { data } = await this.http.post(`/${this.config.accountId}/reports/filter.json`, {
             // TODO: Are all properties required?
             project_ids: '',
             user_ids: '',
@@ -21,14 +26,16 @@ export class Events {
             order: 'desc',
             published: true,
         })
+        return data
     }
 
     async getByProjectId(projectId: number, start: string, end: string): Promise<TimelyEvent[]> {
-        return this.http.get(
+        const { data } = await this.http.get(
             `/${this.config.accountId}/projects/${projectId}/events${
                 start ? `?since=${start}` : ''
             }${end ? `&upto=${end}` : ''}`,
         )
+        return data
     }
 
     /**
@@ -43,19 +50,29 @@ export class Events {
      *   { id: 123456764, billed: true, label_ids: [], project_id: 1234567 },
      * ]
      */
-    async bulkUpdate(updateArray: any[]): Promise<TimelyBulkUpdateEventsReturn[]> {
-        return this.http.post(`/${this.config.accountId}/bulk/hours`, { update: updateArray })
+    async bulkUpdate(
+        updateArray: TimelyEventBulkUpdate[],
+    ): Promise<TimelyBulkUpdateEventsReturn[]> {
+        const { data } = await this.http.post(`/${this.config.accountId}/bulk/hours`, {
+            update: updateArray,
+        })
+        return data
     }
 
     async bulkDelete(eventIds: number[]): Promise<TimelyBulkUpdateEventsReturn[]> {
-        return this.http.post(`/${this.config.accountId}/bulk/events`, { delete: eventIds })
+        const { data } = await this.http.post(`/${this.config.accountId}/bulk/events`, {
+            delete: eventIds,
+        })
+        return data
     }
 
     async update(eventId: number, event: TimelyEvent): Promise<TimelyEvent> {
-        return this.http.put(`/${this.config.accountId}/events/${eventId}`, event)
+        const { data } = await this.http.put(`/${this.config.accountId}/events/${eventId}`, event)
+        return data
     }
 
     async getById(eventId: number): Promise<TimelyEvent> {
-        return this.http.get(`/${this.config.accountId}/events/${eventId}`)
+        const { data } = await this.http.get(`/${this.config.accountId}/events/${eventId}`)
+        return data
     }
 }

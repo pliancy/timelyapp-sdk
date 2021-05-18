@@ -5,10 +5,12 @@ export class Accounts {
     constructor(private readonly http: AxiosInstance) {}
 
     async getAll(): Promise<TimelyAccount[]> {
-        return this.http.get('/accounts')
+        const { data } = await this.http.get('/accounts')
+        return data
     }
 
     async getById(accountId: string): Promise<TimelyAccount> {
-        return this.http.get(`/accounts/${accountId}`)
+        const { data } = await this.http.get(`/accounts/${accountId}`)
+        return data
     }
 }

@@ -12,11 +12,13 @@ export class Users {
     constructor(private readonly http: AxiosInstance, private readonly config: TimelyAppConfig) {}
 
     async getAll(): Promise<TimelyUser[]> {
-        return this.http.get(`/${this.config.accountId}/users?limit=1000`)
+        const { data } = await this.http.get(`/${this.config.accountId}/users?limit=1000`)
+        return data
     }
 
     async getById(userId: number): Promise<TimelyUser> {
-        return this.http.get(`/${this.config.accountId}/users/${userId}`)
+        const { data } = await this.http.get(`/${this.config.accountId}/users/${userId}`)
+        return data
     }
 
     async getByEmail(userEmail: string): Promise<TimelyUser> {
@@ -29,15 +31,18 @@ export class Users {
     }
 
     async add(user: TimelyUser): Promise<TimelyUser> {
-        return this.http.post(`/${this.config.accountId}/users`, user)
+        const { data } = await this.http.post(`/${this.config.accountId}/users`, user)
+        return data
     }
 
     async update(userId: number, user: TimelyUser): Promise<TimelyUser> {
-        return this.http.put(`/${this.config.accountId}/users${userId}`, user)
+        const { data } = await this.http.put(`/${this.config.accountId}/users${userId}`, user)
+        return data
     }
 
     async removeUserById(userId: number): Promise<{}> {
-        return this.http.delete(`/${this.config.accountId}/users/${userId}`)
+        const { data } = await this.http.delete(`/${this.config.accountId}/users/${userId}`)
+        return data
     }
 
     async removeUserByEmail(userEmail: string): Promise<{}> {
@@ -47,22 +52,29 @@ export class Users {
     }
 
     async getRoles(): Promise<TimelyRole[]> {
-        return this.http.get(`/${this.config.accountId}/roles`)
+        const { data } = await this.http.get(`/${this.config.accountId}/roles`)
+        return data
     }
 
     async getUserCapacities(): Promise<TimelyUserCapacity[]> {
-        return this.http.get(`/${this.config.accountId}/users/capacities`)
+        const { data } = await this.http.get(`/${this.config.accountId}/users/capacities`)
+        return data
     }
 
     async getUserCapacityById(userId: number): Promise<TimelyCapacity> {
-        return this.http.get(`/${this.config.accountId}/users/${userId}/capacities`)
+        const { data } = await this.http.get(`/${this.config.accountId}/users/${userId}/capacities`)
+        return data
     }
 
     async getUsersPermissions(): Promise<TimelyPermission[]> {
-        return this.http.get(`/${this.config.accountId}/users/current/permissions`)
+        const { data } = await this.http.get(`/${this.config.accountId}/users/current/permissions`)
+        return data
     }
 
     async getUsersPermissionsById(userId: number): Promise<TimelyPermission[]> {
-        return this.http.get(`/${this.config.accountId}/users/${userId}/permissions`)
+        const { data } = await this.http.get(
+            `/${this.config.accountId}/users/${userId}/permissions`,
+        )
+        return data
     }
 }
