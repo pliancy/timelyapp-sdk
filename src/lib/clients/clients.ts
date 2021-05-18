@@ -5,11 +5,13 @@ export class Clients {
     constructor(private readonly http: AxiosInstance, private readonly config: TimelyAppConfig) {}
 
     async getAll(): Promise<TimelyClient[]> {
-        return this.http.get(`/${this.config.accountId}/clients?show=all`)
+        const { data } = await this.http.get(`/${this.config.accountId}/clients?show=all`)
+        return data
     }
 
     async getById(clientId: number): Promise<TimelyClient> {
-        return this.http.get(`/${this.config.accountId}/clients/${clientId}`)
+        const { data } = await this.http.get(`/${this.config.accountId}/clients/${clientId}`)
+        return data
     }
 
     async getByName(clientName: string): Promise<TimelyClient> {
@@ -20,10 +22,15 @@ export class Clients {
     }
 
     async add(client: TimelyClient): Promise<TimelyClient> {
-        return this.http.post(`/${this.config.accountId}/clients`, client)
+        const { data } = await this.http.post(`/${this.config.accountId}/clients`, client)
+        return data
     }
 
     async update(clientId: string, client: TimelyClient): Promise<TimelyClient> {
-        return this.http.put(`/${this.config.accountId}/clients/${clientId}`, client)
+        const { data } = await this.http.put(
+            `/${this.config.accountId}/clients/${clientId}`,
+            client,
+        )
+        return data
     }
 }
