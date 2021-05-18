@@ -1,3 +1,5 @@
+type OptionalExceptFor<T, TRequired extends keyof T> = Partial<T> & Pick<T, TRequired>
+
 export interface TimelyAppConfig {
     /** temporary for dev work */
     token: string
@@ -364,3 +366,5 @@ export interface TimelyBulkUpdateEventsReturn {
     created_ids: number[]
     updated_ids: number[]
 }
+
+export type TimelyEventBulkUpdate = OptionalExceptFor<TimelyEvent, 'id'>
