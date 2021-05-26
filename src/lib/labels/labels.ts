@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios'
-import { TimelyAppConfig, TimelyLabel } from '../types'
+import { AddTimelyLabel, TimelyAppConfig, TimelyLabel } from '../types'
 
 export class Labels {
     constructor(private readonly http: AxiosInstance, private readonly config: TimelyAppConfig) {}
@@ -21,7 +21,7 @@ export class Labels {
         return data
     }
 
-    async add(label: TimelyLabel): Promise<TimelyLabel> {
+    async add(label: TimelyLabel): Promise<AddTimelyLabel> {
         const { data } = await this.http.post(`/${this.config.accountId}/labels`, {
             label,
         })

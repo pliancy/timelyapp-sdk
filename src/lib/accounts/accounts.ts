@@ -9,7 +9,7 @@ export class Accounts {
         return data
     }
 
-    async getById(accountId: string): Promise<TimelyAccount> {
+    async getById(accountId: number): Promise<TimelyAccount> {
         const { data } = await this.http.get(`/accounts/${accountId}`)
         return data
     }

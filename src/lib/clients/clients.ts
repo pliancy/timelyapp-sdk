@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios'
-import { TimelyAppConfig, TimelyClient } from '../types'
+import { AddTimelyClient, TimelyAppConfig, TimelyClient } from '../types'
 
 export class Clients {
     constructor(private readonly http: AxiosInstance, private readonly config: TimelyAppConfig) {}
@@ -21,7 +21,7 @@ export class Clients {
         return client
     }
 
-    async add(client: TimelyClient): Promise<TimelyClient> {
+    async add(client: TimelyClient): Promise<AddTimelyClient> {
         const { data } = await this.http.post(`/${this.config.accountId}/clients`, { client })
         return data
     }

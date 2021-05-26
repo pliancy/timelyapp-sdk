@@ -1,5 +1,6 @@
 import { AxiosInstance } from 'axios'
 import {
+    AddTimelyUser,
     TimelyAppConfig,
     TimelyCapacity,
     TimelyPermission,
@@ -30,7 +31,7 @@ export class Users {
         return user
     }
 
-    async add(user: TimelyUser): Promise<TimelyUser> {
+    async add(user: TimelyUser): Promise<AddTimelyUser> {
         const { data } = await this.http.post(`/${this.config.accountId}/users`, { user })
         return data
     }
