@@ -21,7 +21,7 @@ export class Clients {
         return client
     }
 
-    async add(client: TimelyClient): Promise<AddTimelyClient> {
+    async add(client: AddTimelyClient): Promise<TimelyClient> {
         const { data } = await this.http.post(`/${this.config.accountId}/clients`, { client })
         return data
     }

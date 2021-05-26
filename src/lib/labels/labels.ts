@@ -21,7 +21,7 @@ export class Labels {
         return data
     }
 
-    async add(label: TimelyLabel): Promise<AddTimelyLabel> {
+    async add(label: AddTimelyLabel): Promise<TimelyLabel> {
         const { data } = await this.http.post(`/${this.config.accountId}/labels`, {
             label,
         })
