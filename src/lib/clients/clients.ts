@@ -26,7 +26,7 @@ export class Clients {
         return data
     }
 
-    async update(clientId: string, client: Partial<TimelyClient>): Promise<TimelyClient> {
+    async update(clientId: number, client: Partial<TimelyClient>): Promise<TimelyClient> {
         const { data } = await this.http.put(`/${this.config.accountId}/clients/${clientId}`, {
             client,
         })
