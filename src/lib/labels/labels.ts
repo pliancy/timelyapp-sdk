@@ -14,8 +14,17 @@ export class Labels {
         return data
     }
 
-    async update(labelId: number, label: TimelyLabel): Promise<TimelyLabel> {
-        const { data } = await this.http.put(`/${this.config.accountId}/labels/${labelId}`, label)
+    async update(labelId: number, label: Partial<TimelyLabel>): Promise<TimelyLabel> {
+        const { data } = await this.http.put(`/${this.config.accountId}/labels/${labelId}`, {
+            label,
+        })
+        return data
+    }
+
+    async add(label: TimelyLabel): Promise<TimelyLabel> {
+        const { data } = await this.http.post(`/${this.config.accountId}/labels`, {
+            label,
+        })
         return data
     }
 }

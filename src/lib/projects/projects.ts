@@ -24,11 +24,10 @@ export class Projects {
         return data
     }
 
-    async update(projectId: number, project: TimelyProject): Promise<TimelyProject> {
-        const { data } = await this.http.put(
-            `/${this.config.accountId}/projects/${projectId}`,
+    async update(projectId: number, project: Partial<TimelyProject>): Promise<TimelyProject> {
+        const { data } = await this.http.put(`/${this.config.accountId}/projects/${projectId}`, {
             project,
-        )
+        })
         return data
     }
 }

@@ -10,8 +10,8 @@ export interface TimelyAppConfig {
 }
 
 export interface TimelyAccount {
-    id?: number
-    name?: string
+    id: number
+    name: string
     color?: string
     currency?: {
         id?: string
@@ -75,7 +75,7 @@ export interface TimelyAccount {
 
 export interface TimelyClient {
     id?: number
-    name?: string
+    name: string
     active?: boolean
     external_id?: string
     updated_at?: string
@@ -139,6 +139,7 @@ export interface TimelyProject {
     budget_scope: any
     client: TimelyClient
     required_notes: boolean
+    required_labels: boolean
     budget_expired_on?: any
     has_recurrence: boolean
     enable_labels: 'all' | 'none' | 'custom'
@@ -201,13 +202,13 @@ export interface TimelyProjectLabel {
 
 export interface AddTimelyProject {
     name: string
-    active: boolean
-    currency_code: string
+    active?: boolean
+    currency_code?: string
     color: string
     client_id: number
-    budget_type: string
-    users: Array<{ user_id: number }>
-    rate_type?: string
+    budget_type?: string
+    users: Array<{ user_id: number; hour_rate?: number }>
+    rate_type: 'user' | 'project'
     hour_rate?: number
     budget?: number
     billable?: boolean
