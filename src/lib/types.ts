@@ -197,13 +197,13 @@ export interface TimelyProjectLabel {
 
 export interface AddTimelyProject {
     name: string
-    active?: boolean
-    currency_code?: string
     color: string
     client_id: number
-    budget_type?: string
-    users: Array<{ user_id: number; hour_rate?: number }>
     rate_type: 'user' | 'project'
+    active?: boolean
+    currency_code?: string
+    budget_type?: string
+    users?: Array<{ user_id: number; hour_rate?: number }>
     hour_rate?: number
     budget?: number
     billable?: boolean
