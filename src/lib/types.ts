@@ -10,119 +10,114 @@ export interface TimelyAppConfig {
 }
 
 export interface TimelyAccount {
-    id?: number
-    name?: string
-    color?: string
-    currency?: {
-        id?: string
-        name?: string
-        iso_code?: string
-        symbol?: string
-        symbol_first?: boolean
+    id: number
+    name: string
+    color: string
+    currency: {
+        id: string
+        name: string
+        iso_code: string
+        symbol: string
+        symbol_first: boolean
     }
-    logo?: {
-        large_retina?: string
-        medium_retina?: string
-        small_retina?: string
-        brand_logo?: boolean
+    logo: {
+        large_retina: string
+        medium_retina: string
+        small_retina: string
+        brand_logo: boolean
     }
-    from?: string
-    max_users?: number
-    seats?: number
-    max_projects?: number
-    plan_id?: number
-    plan_name?: string
-    next_charge?: string
-    start_of_week?: number
-    created_at?: number
-    payment_mode?: string
-    paid?: boolean
-    company_size?: string
-    plan_code?: string
-    plan_custom?: boolean
-    appstore_transaction_id?: number
-    owner_id?: number
-    weekly_user_capacity?: number
-    default_hour_rate?: number
-    support_email?: string
-    estimated_company_size?: string
-    industry?: string
-    num_users?: number
-    num_projects?: number
-    active_projects_count?: number
-    total_projects_count?: number
-    capacity?: {
-        hours?: number
-        minutes?: number
-        seconds?: number
-        formatted?: string
-        total_hours?: number
-        total_seconds?: number
-        total_minutes?: number
+    from: string
+    max_users: number
+    seats: number
+    max_projects: number
+    plan_id: number
+    plan_name: string
+    next_charge: string
+    start_of_week: number
+    created_at: number
+    payment_mode: string
+    paid: boolean
+    company_size: string
+    plan_code: string
+    plan_custom: boolean
+    appstore_transaction_id: number
+    owner_id: number
+    weekly_user_capacity: number
+    default_hour_rate: number
+    support_email: string
+    estimated_company_size: string
+    industry: string
+    num_users: number
+    num_projects: number
+    active_projects_count: number
+    total_projects_count: number
+    capacity: {
+        hours: number
+        minutes: number
+        seconds: number
+        formatted: string
+        total_hours: number
+        total_seconds: number
+        total_minutes: number
     }
-    status?: string
-    beta?: boolean
-    expired?: boolean
-    trial?: boolean
-    days_to_end_trial?: number
-    features?: {
-        [index: string]: {
-            name?: string
-            days?: number
-        }
-    }
+    status: string
+    beta: boolean
+    expired: boolean
+    trial: boolean
+    days_to_end_trial: number
+    features: Array<{ name: string; days: number }>
 }
 
 export interface TimelyClient {
-    id?: number
-    name?: string
-    active?: boolean
-    external_id?: string
-    updated_at?: string
+    id: number
+    name: string
+    active: boolean
+    external_id: string
+    updated_at: string
 }
 
 export interface TimelyUser {
-    id?: number
-    email?: string
-    name?: string
-    active?: boolean
-    day_view_onboarded?: boolean
-    memory_onboarded?: boolean
-    created_at?: number
-    updated_at?: number
-    last_received_memories_date?: boolean
-    sign_in_count?: boolean
-    external_id?: string
-    time_zone?: string
-    avatar?: {
-        large_retina?: string
-        large?: string
-        medium_retina?: string
-        medium?: string
-        small_retina?: string
-        small?: string
+    id: number
+    email: string
+    name: string
+    active: boolean
+    day_view_onboarded: boolean
+    memory_onboarded: boolean
+    created_at: number
+    updated_at: number
+    last_received_memories_date: boolean
+    sign_in_count: boolean
+    external_id: string
+    time_zone: string
+    avatar: {
+        large_retina: string
+        large: string
+        medium_retina: string
+        medium: string
+        small_retina: string
+        small: string
     }
-    type?: string
-    weekly_capacity?: number
-    user_level?: string
-    admin?: boolean
-    hide_hourly_rate?: boolean
-    deleted?: boolean
-    default_hour_rate?: number
-    role_id?: number
-    role?: {
-        id?: number
-        name?: string
+    type: string
+    weekly_capacity: number
+    user_level: string
+    admin: boolean
+    hide_hourly_rate: boolean
+    deleted: boolean
+    default_hour_rate: number
+    role_id: number
+    role: {
+        id: number
+        name: string
     }
 }
 
 export interface TimelyLabel {
-    id?: number
-    name?: string
-    sequence?: number
-    parent_id?: number
-    emoji?: string
-    active?: boolean
+    id: number
+    name: string
+    sequence: number
+    parent_id: number
+    emoji: string
+    active: boolean
     children: TimelyLabel[]
 }
 
@@ -139,6 +134,7 @@ export interface TimelyProject {
     budget_scope: any
     client: TimelyClient
     required_notes: boolean
+    required_labels: boolean
     budget_expired_on?: any
     has_recurrence: boolean
     enable_labels: 'all' | 'none' | 'custom'
@@ -201,13 +197,13 @@ export interface TimelyProjectLabel {
 
 export interface AddTimelyProject {
     name: string
-    active: boolean
-    currency_code: string
     color: string
     client_id: number
-    budget_type: string
-    users: Array<{ user_id: number }>
-    rate_type?: string
+    rate_type: 'user' | 'project'
+    active?: boolean
+    currency_code?: string
+    budget_type?: string
+    users?: Array<{ user_id: number; hour_rate?: number }>
     hour_rate?: number
     budget?: number
     billable?: boolean
@@ -368,3 +364,9 @@ export interface TimelyBulkUpdateEventsReturn {
 }
 
 export type TimelyEventBulkUpdate = OptionalExceptFor<TimelyEvent, 'id'>
+
+export type AddTimelyClient = OptionalExceptFor<TimelyClient, 'name'>
+
+export type AddTimelyUser = OptionalExceptFor<TimelyUser, 'name' | 'email' | 'role_id'>
+
+export type AddTimelyLabel = OptionalExceptFor<TimelyLabel, 'name'>

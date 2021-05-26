@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios'
-import { TimelyAppConfig, TimelyClient } from '../types'
+import { AddTimelyClient, TimelyAppConfig, TimelyClient } from '../types'
 
 export class Clients {
     constructor(private readonly http: AxiosInstance, private readonly config: TimelyAppConfig) {}
@@ -21,16 +21,15 @@ export class Clients {
         return client
     }
 
-    async add(client: TimelyClient): Promise<TimelyClient> {
-        const { data } = await this.http.post(`/${this.config.accountId}/clients`, client)
+    async add(client: AddTimelyClient): Promise<TimelyClient> {
+        const { data } = await this.http.post(`/${this.config.accountId}/clients`, { client })
         return data
     }
 
-    async update(clientId: string, client: TimelyClient): Promise<TimelyClient> {
-        const { data } = await this.http.put(
-            `/${this.config.accountId}/clients/${clientId}`,
+    async update(clientId: string, client: Partial<TimelyClient>): Promise<TimelyClient> {
+        const { data } = await this.http.put(`/${this.config.accountId}/clients/${clientId}`, {
             client,
-        )
+        })
         return data
     }
 }

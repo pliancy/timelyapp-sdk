@@ -66,7 +66,7 @@ export class Events {
         return data
     }
 
-    async update(eventId: number, event: TimelyEvent): Promise<TimelyEvent> {
+    async update(eventId: number, event: Partial<TimelyEvent>): Promise<TimelyEvent> {
         const { data } = await this.http.put(`/${this.config.accountId}/events/${eventId}`, event)
         return data
     }

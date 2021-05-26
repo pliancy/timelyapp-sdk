@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios'
-import { TimelyAppConfig, TimelyLabel } from '../types'
+import { AddTimelyLabel, TimelyAppConfig, TimelyLabel } from '../types'
 
 export class Labels {
     constructor(private readonly http: AxiosInstance, private readonly config: TimelyAppConfig) {}
@@ -14,8 +14,17 @@ export class Labels {
         return data
     }
 
-    async update(labelId: number, label: TimelyLabel): Promise<TimelyLabel> {
-        const { data } = await this.http.put(`/${this.config.accountId}/labels/${labelId}`, label)
+    async update(labelId: number, label: Partial<TimelyLabel>): Promise<TimelyLabel> {
+        const { data } = await this.http.put(`/${this.config.accountId}/labels/${labelId}`, {
+            label,
+        })
+        return data
+    }
+
+    async add(label: AddTimelyLabel): Promise<TimelyLabel> {
+        const { data } = await this.http.post(`/${this.config.accountId}/labels`, {
+            label,
+        })
         return data
     }
 }
