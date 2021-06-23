@@ -17,6 +17,7 @@
         "build:ci": "tsc",
         "build:check": "tsc --noEmit",
         "build:watch": "yarn clean && tsc -w",
+        "postinstall": "[ -d '.husky' ] && husky install || true",
         "prepublishOnly": "yarn build"
     },
     "keywords": [],
