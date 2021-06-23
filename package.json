@@ -30,7 +30,7 @@
         "url": "https://github.com/pliancy/timelyapp-sdk"
     },
     "devDependencies": {
-        "@pliancy/eslint-config-ts": "^0.0.4",
+        "@pliancy/eslint-config-ts": "^0.0.5",
         "@types/jest": "^26.0.23",
         "dotenv": "^8.2.0",
         "husky": "^5.1.1",
