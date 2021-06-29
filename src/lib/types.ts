@@ -336,6 +336,7 @@ export interface TimelyEvent {
     created_at: number
     created_from: string
     updated_from: string
+    // Setting this to true will also lock the entry and set the locked_reason to "Billed"
     billed: boolean
     billable: boolean
     to: any
@@ -351,8 +352,8 @@ export interface TimelyEvent {
     draft: boolean
     manage: boolean
     forecast_id: any
-    locked_reason: any
-    locked: boolean
+    readonly locked_reason: string
+    readonly locked: boolean
     invoice_id: any
     timestamps: any[]
 }
@@ -370,3 +371,5 @@ export type AddTimelyClient = OptionalExceptFor<TimelyClient, 'name'>
 export type AddTimelyUser = OptionalExceptFor<TimelyUser, 'name' | 'email' | 'role_id'>
 
 export type AddTimelyLabel = OptionalExceptFor<TimelyLabel, 'name'>
+
+export type DateString = string | Date

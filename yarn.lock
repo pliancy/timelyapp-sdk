@@ -525,10 +525,10 @@
     "@nodelib/fs.scandir" "2.1.4"
     fastq "^1.6.0"
 
-"@pliancy/eslint-config-ts@^0.0.4":
-  version "0.0.4"
-  resolved "https://npm.pkg.github.com/download/@pliancy/eslint-config-ts/0.0.4/77297a079c6aefad5877024d0ffbb9a053effb074862b70c394cd41b84309234#8cbaf5c02753371e413f34a124cd77c551bbe4cc"
-  integrity sha512-uAz72Q2sRzornYYbE+dDS0bdGnDavnqze+RUBJL5jZn6qzkSodYu8EHAYDCgN0uV4J/Ar0SbQ+9nyQ+VayjOew==
+"@pliancy/eslint-config-ts@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@pliancy/eslint-config-ts/-/eslint-config-ts-0.0.5.tgz#cfb14eff888552693767910c27be55ba13c70e15"
+  integrity sha512-RWKV0SlKdoRP1Mw1WlOhsDKdxDyL4QVUjRxKM/dr9uu348QiCJCnDKZnPjzNPNH51sNiTxtxF4YvPXHKblzIXg==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^4.6.1"
     "@typescript-eslint/parser" "^4.6.1"
@@ -2632,10 +2632,10 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-husky@^5.1.1:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-5.2.0.tgz#fc5e1c2300d34855d47de4753607d00943fc0802"
-  integrity sha512-AM8T/auHXRBxlrfPVLKP6jt49GCM2Zz47m8G3FOMsLmTv8Dj/fKVWE0Rh2d4Qrvmy131xEsdQnb3OXRib67PGg==
+husky@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-6.0.0.tgz#810f11869adf51604c32ea577edbc377d7f9319e"
+  integrity sha512-SQS2gDTB7tBN486QSoKPKQItZw97BMOd+Kdb6ghfpBc0yXyzrddI0oDV5MkDAbuB4X2mO3/nj60TRMcYxwzZeQ==
 
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
   version "0.4.24"
