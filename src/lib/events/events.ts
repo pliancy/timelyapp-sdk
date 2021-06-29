@@ -1,5 +1,6 @@
 import { AxiosInstance } from 'axios'
 import {
+    DateString,
     TimelyAppConfig,
     TimelyBulkUpdateEventsReturn,
     TimelyEvent,
@@ -9,9 +10,9 @@ import {
 export class Events {
     constructor(private readonly http: AxiosInstance, private readonly config: TimelyAppConfig) {}
 
-    async getAll(start?: string, end?: string): Promise<TimelyEvent[]> {
-        const startDate = start ? this.ensureISOFormat(start) : null
-        const endDate = end ? this.ensureISOFormat(end) : null
+    async getAll(start?: DateString, end?: DateString): Promise<TimelyEvent[]> {
+        // Ensure given date range conforms to ISO string format
+        const [startDate, endDate] = [start, end].map((s) => (s ? this.ensureISOFormat(s) : null))
         const { data } = await this.http.post(`/${this.config.accountId}/reports/filter.json`, {
             // TODO: Are all properties required?
             project_ids: '',
@@ -32,9 +33,13 @@ export class Events {
         return data
     }
 
-    async getByProjectId(projectId: number, start: string, end: string): Promise<TimelyEvent[]> {
-        const startDate = this.ensureISOFormat(start)
-        const endDate = this.ensureISOFormat(end)
+    async getByProjectId(
+        projectId: number,
+        start: DateString,
+        end: DateString,
+    ): Promise<TimelyEvent[]> {
+        // Ensure given date range conforms to ISO string format
+        const [startDate, endDate] = [start, end].map((s) => this.ensureISOFormat(s))
         const { data } = await this.http.get(
             `/${this.config.accountId}/projects/${projectId}/events${
                 start ? `?since=${startDate}` : ''
@@ -82,17 +87,22 @@ export class Events {
     }
 
     /**
-     * '2021/05/01' -> '2021-05-01'
+     * Convert any Date or Date-parseable string to ISO format (e.g., yyyy-mm-dd)
      * @param date
-     * @private
      */
-    private ensureISOFormat(date: string): string {
+    ensureISOFormat(date: DateString): string {
         try {
-            const str = date.replace(/-/gi, '/')
-            const parsed = Date.parse(str)
-            return new Date(parsed).toISOString().slice(0, 10)
+            const re = /^\d{4}-\d{2}-\d{2}$/
+            if (typeof date === 'string' && re.test(date)) return date
+            return date instanceof Date
+                ? this.asShortISOString(date)
+                : this.asShortISOString(new Date(date.replace(/-/gi, '/')))
         } catch (e) {
-            throw new Error(`Unable to parse ${date} as a JS ISO-formatted string`)
+            throw new Error(`Unable to parse ${date} as YYYY-MM-DD`)
         }
+    }
+
+    private asShortISOString(date: Date): string {
+        return date.toISOString().slice(0, 10)
     }
 }

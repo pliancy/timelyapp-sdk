@@ -79,19 +79,36 @@ describe('Events', () => {
         })
     })
 
-    describe('date parsing/formatting', () => {
-        it('fails to ensure ISO format given input that cannot be parsed as a date', () => {
-            expect(() => events['ensureISOFormat']('i am not a date')).toThrow(
-                'Unable to parse i am not a date as a JS ISO-formatted string',
-            )
+    describe('ensureISOFormat', () => {
+        describe('fails', () => {
+            it('given a string that cannot be parsed as a date', () => {
+                expect(() => events.ensureISOFormat('i am not a date')).toThrow(
+                    'Unable to parse i am not a date as YYYY-MM-DD',
+                )
+            })
+
+            it('given a type that cannot be parsed as a Date', () => {
+                expect(() => events.ensureISOFormat(false as never)).toThrow(
+                    'Unable to parse false as YYYY-MM-DD',
+                )
+            })
         })
 
-        it('ensures ISO format given a date formatted as mm/dd/yyyy', () => {
-            expect(events['ensureISOFormat']('01/01/1970')).toEqual('1970-01-01')
-        })
+        describe('succeeds', () => {
+            const expected = '1970-01-01'
+            const testCases = [
+                '01/01/1970',
+                '1970/01/01',
+                '1970-1-1',
+                '70-1-1',
+                '1-1-70',
+                new Date('1970/01/01'),
+            ]
 
-        it('ensures ISO format given a date formatted as yyyy/mm/dd', () => {
-            expect(events['ensureISOFormat']('1970/01/01')).toEqual('1970-01-01')
+            for (const c of testCases) {
+                it(`given ${c.toString()}`, () =>
+                    expect(events.ensureISOFormat(c)).toEqual(expected))
+            }
         })
     })
 })

@@ -371,3 +371,5 @@ export type AddTimelyClient = OptionalExceptFor<TimelyClient, 'name'>
 export type AddTimelyUser = OptionalExceptFor<TimelyUser, 'name' | 'email' | 'role_id'>
 
 export type AddTimelyLabel = OptionalExceptFor<TimelyLabel, 'name'>
+
+export type DateString = string | Date
