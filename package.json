@@ -32,7 +32,7 @@
     },
     "devDependencies": {
         "@pliancy/eslint-config-ts": "^0.0.5",
-        "@types/jest": "^26.0.23",
+        "@types/jest": "27.0.1",
         "dotenv": "^8.2.0",
         "husky": "^6.0.0",
         "jest": "^26.6.3",
