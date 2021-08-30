@@ -33,9 +33,6 @@
     "engines": {
         "node": ">=12"
     },
-    "files": [
-        "dist"
-    ],
     "keywords": [],
     "license": "MIT",
     "main": "index.js",
