@@ -1,70 +1,63 @@
 {
-    "name": "timelyapp",
-    "version": "2.1.2",
-    "description": "SDK for timelyapp.com API",
-    "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
-    "files": [
-        "dist"
-    ],
-    "scripts": {
-        "clean": "rimraf dist coverage tmp",
-        "lint": "eslint \"./**/*.{ts,js,json,yml}\" --fix",
-        "test": "jest",
-        "test:ci": "jest --coverage",
-        "test:watch": "jest --watch",
-        "build": "yarn clean && yarn lint && tsc",
-        "build:ci": "tsc",
-        "build:check": "tsc --noEmit",
-        "build:watch": "yarn clean && tsc -w",
-        "postinstall": "[ -d '.husky' ] && husky install || true",
-        "prepublishOnly": "yarn build"
-    },
-    "keywords": [],
     "author": {
         "name": "Josh Stout",
         "email": "joshstout@gmail.com"
     },
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/pliancy/timelyapp-sdk"
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/@digitalroute/cz-conventional-changelog-for-jira",
+            "skipScope": false
+        }
     },
+    "dependencies": {
+        "axios": "0.21.1"
+    },
+    "description": "SDK for timelyapp.com API",
     "devDependencies": {
-        "@pliancy/eslint-config-ts": "^0.0.5",
-        "@types/jest": "^26.0.23",
-        "dotenv": "^8.2.0",
-        "husky": "^6.0.0",
-        "jest": "^26.6.3",
-        "lint-staged": "^10.5.4",
-        "np": "^7.3.0",
-        "rimraf": "^3.0.2",
-        "ts-jest": "^26.5.1",
+        "@digitalroute/cz-conventional-changelog-for-jira": "6.6.0",
+        "@pliancy/eslint-config-ts": "0.0.5",
+        "@types/jest": "27.0.1",
+        "commitizen": "4.2.4",
+        "cpy-cli": "3.1.1",
+        "husky": "7.0.2",
+        "jest": "27.1.0",
+        "npm-run-all": "^4.1.5",
+        "pinst": "2.1.6",
+        "rimraf": "3.0.2",
+        "ts-jest": "27.0.5",
         "ts-node": "^9.1.1",
-        "typescript": "^4.2.2"
+        "typescript": "4.4.2"
     },
     "engines": {
         "node": ">=12"
     },
+    "files": [
+        "dist"
+    ],
+    "keywords": [],
+    "license": "MIT",
+    "main": "index.js",
+    "name": "timelyapp",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pliancy/timelyapp-sdk"
+    },
+    "scripts": {
+        "build": "run-s -l clean test tsc copy",
+        "build:check": "tsc --noEmit",
+        "clean": "rimraf coverage dist tmp",
+        "copy": "pinst --disable && cpy package.json dist && cpy README.md dist && pinst --enable",
+        "lint": "eslint \"src/**/*.ts\" --fix",
+        "postinstall": "husky install",
+        "qa": "run-s -l lint test clean build:check",
+        "semantic-release": "semantic-release",
+        "test": "jest",
+        "tsc": "tsc -p tsconfig.build.json"
+    },
+    "types": "index.d.ts",
+    "version": "2.1.2",
     "volta": {
-        "node": "14.16.1",
+        "node": "14.17.1",
         "yarn": "1.22.10"
-    },
-    "dependencies": {
-        "axios": "^0.21.1"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged && yarn build:check"
-        }
-    },
-    "lint-staged": {
-        "*.{js,jsx,ts,tsx}": [
-            "eslint --cache --fix"
-        ]
-    },
-    "np": {
-        "yarn": false,
-        "branch": "main"
     }
 }
