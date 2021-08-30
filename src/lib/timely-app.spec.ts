@@ -10,7 +10,7 @@ describe('TimelyApp', () => {
         try {
             new TimelyApp({} as never)
         } catch (e) {
-            expect(e.message).toBe('Missing required inputs for TimelyApp constructor')
+            expect((e as Error).message).toBe('Missing required inputs for TimelyApp constructor')
         }
     })
 

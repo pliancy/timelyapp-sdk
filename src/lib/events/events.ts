@@ -90,19 +90,11 @@ export class Events {
      * Convert any Date or Date-parseable string to ISO format (e.g., yyyy-mm-dd)
      * @param date
      */
-    ensureISOFormat(date: DateString): string {
+    ensureISOFormat(date: DateString) {
         try {
-            const re = /^\d{4}-\d{2}-\d{2}$/
-            if (typeof date === 'string' && re.test(date)) return date
-            return date instanceof Date
-                ? this.asShortISOString(date)
-                : this.asShortISOString(new Date(date.replace(/-/gi, '/')))
+            return new Date(date).toISOString().slice(0, 10)
         } catch (e) {
-            throw new Error(`Unable to parse ${date} as YYYY-MM-DD`)
+            throw new Error(`Unable to parse "${date}" as YYYY-MM-DD`)
         }
-    }
-
-    private asShortISOString(date: Date): string {
-        return date.toISOString().slice(0, 10)
     }
 }
