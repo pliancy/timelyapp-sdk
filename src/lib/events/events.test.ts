@@ -83,13 +83,13 @@ describe('Events', () => {
         describe('fails', () => {
             it('given a string that cannot be parsed as a date', () => {
                 expect(() => events.ensureISOFormat('i am not a date')).toThrow(
-                    'Unable to parse i am not a date as YYYY-MM-DD',
+                    'Unable to parse "i am not a date" as YYYY-MM-DD',
                 )
             })
 
             it('given a type that cannot be parsed as a Date', () => {
-                expect(() => events.ensureISOFormat(false as never)).toThrow(
-                    'Unable to parse false as YYYY-MM-DD',
+                expect(() => events.ensureISOFormat({} as never)).toThrow(
+                    'Unable to parse "[object Object]" as YYYY-MM-DD',
                 )
             })
         })
