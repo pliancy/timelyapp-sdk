@@ -76,6 +76,15 @@ export interface TimelyClient {
     updated_at: string
 }
 
+export interface TimelyTeam {
+    id: number
+    name: string
+    users: {
+        user_id: number
+        lead?: boolean
+    }[]
+}
+
 export interface TimelyUser {
     id: number
     email: string
