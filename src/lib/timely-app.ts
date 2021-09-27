@@ -7,6 +7,7 @@ import { Labels } from './labels/labels'
 import { Projects } from './projects/projects'
 import { Users } from './users/users'
 import { createHttpClient } from './http/http'
+import { Teams } from './teams/teams'
 
 export class TimelyApp {
     readonly accounts: Accounts
@@ -20,6 +21,8 @@ export class TimelyApp {
     readonly labels: Labels
 
     readonly projects: Projects
+
+    readonly teams: Teams
 
     readonly users: Users
 
@@ -39,6 +42,7 @@ export class TimelyApp {
         this.events = new Events(this.http, this.config)
         this.labels = new Labels(this.http, this.config)
         this.projects = new Projects(this.http, this.config)
+        this.teams = new Teams(this.http, this.config)
         this.users = new Users(this.http, this.config)
     }
 
