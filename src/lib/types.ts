@@ -118,6 +118,7 @@ export interface TimelyUser {
         id: number
         name: string
     }
+    projects?: { project_id: number; hour_rate?: number }[]
 }
 
 export interface TimelyLabel {
@@ -377,7 +378,7 @@ export type TimelyEventBulkUpdate = OptionalExceptFor<TimelyEvent, 'id'>
 
 export type AddTimelyClient = OptionalExceptFor<TimelyClient, 'name'>
 
-export type AddTimelyUser = OptionalExceptFor<TimelyUser, 'name' | 'email' | 'role_id'>
+export type AddTimelyUser = OptionalExceptFor<TimelyUser, 'name' | 'email' | 'role_id' | 'projects'>
 
 export type AddTimelyLabel = OptionalExceptFor<TimelyLabel, 'name'>
 

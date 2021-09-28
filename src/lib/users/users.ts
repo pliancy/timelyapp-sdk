@@ -26,12 +26,10 @@ export class Users {
         const { data: response }: { data: TimelyUser[] } = await this.http.get(
             `/${this.config.accountId}/users?limit=999`,
         )
-        const user = response.find((u) => u.email === userEmail)
-        if (!user) throw new Error(`Can't find user with email of ${userEmail}`)
-        return user
+        return response.find((u) => u.email === userEmail) as TimelyUser
     }
 
-    async add(user: TimelyUser): Promise<AddTimelyUser> {
+    async add(user: AddTimelyUser): Promise<TimelyUser> {
         const { data } = await this.http.post(`/${this.config.accountId}/users`, { user })
         return data
     }
