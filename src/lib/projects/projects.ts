@@ -9,6 +9,11 @@ export class Projects {
         return data
     }
 
+    async getArchived(): Promise<TimelyProject[]> {
+        const { data } = await this.http.get(`/${this.config.accountId}/projects?filter=archived`)
+        return data
+    }
+
     async getById(projectId: number): Promise<TimelyProject> {
         const { data } = await this.http.get(`/${this.config.accountId}/projects/${projectId}`)
         return data
