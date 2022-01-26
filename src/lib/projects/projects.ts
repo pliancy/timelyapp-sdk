@@ -19,6 +19,12 @@ export class Projects {
         return data
     }
 
+    async getByExternalId(externalId: string): Promise<TimelyProject | undefined> {
+        const projects = await this.getAll()
+        if (!(projects && projects.length)) return undefined
+        return projects.find((e) => e?.external_id === externalId)
+    }
+
     async add(project: AddTimelyProject): Promise<TimelyProject> {
         const { data } = await this.http.post(`/${this.config.accountId}/projects`, { project })
         return data
