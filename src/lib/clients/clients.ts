@@ -21,6 +21,11 @@ export class Clients {
         return client
     }
 
+    async getByExternalId(customerId: string): Promise<TimelyClient | undefined> {
+        const clients = await this.getAll()
+        return clients.find((e) => e.external_id === customerId)
+    }
+
     async add(client: AddTimelyClient): Promise<TimelyClient> {
         const { data } = await this.http.post(`/${this.config.accountId}/clients`, { client })
         return data
