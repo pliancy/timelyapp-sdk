@@ -8,6 +8,7 @@ import { Projects } from './projects/projects'
 import { Users } from './users/users'
 import { createHttpClient } from './http/http'
 import { Teams } from './teams/teams'
+import { Reports } from './reports/reports'
 
 export class TimelyApp {
     readonly accounts: Accounts
@@ -25,6 +26,8 @@ export class TimelyApp {
     readonly teams: Teams
 
     readonly users: Users
+
+    readonly reports: Reports
 
     constructor(private readonly config: TimelyAppConfig) {
         this.validateConfig()
@@ -44,6 +47,7 @@ export class TimelyApp {
         this.projects = new Projects(this.http, this.config)
         this.teams = new Teams(this.http, this.config)
         this.users = new Users(this.http, this.config)
+        this.reports = new Reports(this.http, this.config)
     }
 
     private validateConfig() {
