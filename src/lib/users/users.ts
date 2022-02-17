@@ -35,7 +35,7 @@ export class Users {
     }
 
     async update(userId: number, user: Partial<TimelyUser>): Promise<TimelyUser> {
-        const { data } = await this.http.put(`/${this.config.accountId}/users${userId}`, { user })
+        const { data } = await this.http.put(`/${this.config.accountId}/users/${userId}`, { user })
         return data
     }
 
