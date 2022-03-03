@@ -63,7 +63,7 @@ export class Events {
     async bulkUpdate(
         updateArray: TimelyEventBulkUpdate[],
     ): Promise<TimelyBulkUpdateEventsReturn[]> {
-        const { data } = await this.http.post(`/${this.config.accountId}/bulk/hours`, {
+        const { data } = await this.http.post(`/${this.config.accountId}/bulk/events`, {
             update: updateArray,
         })
         return data

@@ -61,7 +61,7 @@ describe('Events', () => {
             const res = { data: { updated_ids: [1] } }
             jest.spyOn(axiosMock, 'post').mockResolvedValue(res)
             await expect(events.bulkUpdate(update)).resolves.toEqual(res.data)
-            expect(axiosMock.post).toHaveBeenCalledWith('/accountId/bulk/hours', {
+            expect(axiosMock.post).toHaveBeenCalledWith('/accountId/bulk/events', {
                 update: [{ billed: true, id: 1 }],
             })
         })
