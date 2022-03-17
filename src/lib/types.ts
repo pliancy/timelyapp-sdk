@@ -380,7 +380,7 @@ export type AddTimelyClient = OptionalExceptFor<TimelyClient, 'name'>
 
 export type AddTimelyUser = OptionalExceptFor<TimelyUser, 'name' | 'email' | 'role_id' | 'projects'>
 
-export type UpdateTimelyUser = AddTimelyUser & {
+export interface UpdateTimelyUser extends Partial<TimelyUser> {
     add_to_all_projects?: boolean
 }
 
