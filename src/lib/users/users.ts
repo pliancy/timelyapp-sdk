@@ -7,6 +7,7 @@ import {
     TimelyRole,
     TimelyUser,
     TimelyUserCapacity,
+    UpdateTimelyUser,
 } from '../types'
 
 export class Users {
@@ -34,7 +35,7 @@ export class Users {
         return data
     }
 
-    async update(userId: number, user: Partial<TimelyUser>): Promise<TimelyUser> {
+    async update(userId: number, user: UpdateTimelyUser): Promise<TimelyUser> {
         const { data } = await this.http.put(`/${this.config.accountId}/users/${userId}`, { user })
         return data
     }

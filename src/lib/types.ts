@@ -380,6 +380,10 @@ export type AddTimelyClient = OptionalExceptFor<TimelyClient, 'name'>
 
 export type AddTimelyUser = OptionalExceptFor<TimelyUser, 'name' | 'email' | 'role_id' | 'projects'>
 
+export type UpdateTimelyUser = AddTimelyUser & {
+    add_to_all_projects?: boolean
+}
+
 export type AddTimelyLabel = OptionalExceptFor<TimelyLabel, 'name'>
 
 export type DateString = string | Date
