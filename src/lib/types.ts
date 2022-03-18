@@ -378,9 +378,12 @@ export type TimelyEventBulkUpdate = OptionalExceptFor<TimelyEvent, 'id'>
 
 export type AddTimelyClient = OptionalExceptFor<TimelyClient, 'name'>
 
-export type AddTimelyUser = OptionalExceptFor<TimelyUser, 'name' | 'email' | 'role_id' | 'projects'>
+export type AddTimelyUser = AddToAllProjects &
+    OptionalExceptFor<TimelyUser, 'name' | 'email' | 'role_id'>
 
-export interface UpdateTimelyUser extends Partial<TimelyUser> {
+export type UpdateTimelyUser = Partial<TimelyUser & AddToAllProjects>
+
+export interface AddToAllProjects {
     add_to_all_projects?: boolean
 }
 
