@@ -4,8 +4,10 @@ import { AddTimelyProject, TimelyAppConfig, TimelyProject } from '../types'
 export class Projects {
     constructor(private readonly http: AxiosInstance, private readonly config: TimelyAppConfig) {}
 
-    async getAll(): Promise<TimelyProject[]> {
-        const { data } = await this.http.get(`/${this.config.accountId}/projects?filter=all`)
+    async getAll(filter?: 'active' | 'all' | 'mine' | 'archived'): Promise<TimelyProject[]> {
+        const { data } = await this.http.get(
+            `/${this.config.accountId}/projects?filter=${filter ?? 'active'} `,
+        )
         return data
     }
 
