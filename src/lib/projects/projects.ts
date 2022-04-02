@@ -5,7 +5,7 @@ export class Projects {
     constructor(private readonly http: AxiosInstance, private readonly config: TimelyAppConfig) {}
 
     async getAll(): Promise<TimelyProject[]> {
-        const { data } = await this.http.get(`/${this.config.accountId}/projects`)
+        const { data } = await this.http.get(`/${this.config.accountId}/projects?filter=all`)
         return data
     }
 
