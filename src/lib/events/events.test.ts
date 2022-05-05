@@ -18,7 +18,7 @@ describe('Events', () => {
         })
 
         it('finds all events', async () => {
-            jest.spyOn(axiosMock, 'post').mockResolvedValue({ data: [] })
+            jest.spyOn(axiosMock, 'get').mockResolvedValue({ data: [] })
             await expect(events.getAll()).resolves.toEqual([])
         })
 
@@ -29,7 +29,7 @@ describe('Events', () => {
                 { id: 3, date: new Date('01/03/2021').toISOString() },
                 { id: 4, date: new Date('02/01/2021').toISOString() },
             ]
-            jest.spyOn(axiosMock, 'post').mockResolvedValue({ data })
+            jest.spyOn(axiosMock, 'get').mockResolvedValue({ data })
             data.pop()
             await expect(events.getAll('2021/01/01', '2021/01/31')).resolves.toEqual(data)
         })

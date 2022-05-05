@@ -13,23 +13,12 @@ export class Events {
     async getAll(start?: DateString, end?: DateString): Promise<TimelyEvent[]> {
         // Ensure given date range conforms to ISO string format
         const [startDate, endDate] = [start, end].map((s) => (s ? this.ensureISOFormat(s) : null))
-        const { data } = await this.http.post(`/${this.config.accountId}/reports/filter.json`, {
-            // TODO: Are all properties required?
-            project_ids: '',
-            user_ids: '',
-            team_ids: '',
-            label_ids: '',
-            since: startDate,
-            until: endDate,
-            scope: 'events',
-            limit: 9999,
-            page: 1,
-            select: 'all',
-            sort: 'day',
-            order: 'desc',
-            published: true,
-        })
-
+        const params = {} as { since: string; upto: string }
+        if (startDate && endDate) {
+            params.since = startDate
+            params.upto = endDate
+        }
+        const { data } = await this.http.get(`/${this.config.accountId}/events`, { params })
         return data
     }
 
