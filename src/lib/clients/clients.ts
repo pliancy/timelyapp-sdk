@@ -14,11 +14,9 @@ export class Clients {
         return data
     }
 
-    async getByName(clientName: string): Promise<TimelyClient> {
+    async getByName(clientName: string): Promise<TimelyClient | undefined> {
         const clients = await this.getAll()
-        const client = clients.find((c) => c.name === clientName)
-        if (!client) throw new Error(`Can't find client with name of ${clientName}`)
-        return client
+        return clients.find((c) => c.name === clientName)
     }
 
     async getByExternalId(customerId: string): Promise<TimelyClient | undefined> {
