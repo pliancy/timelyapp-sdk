@@ -1,4 +1,5 @@
 import { AxiosInstance } from 'axios'
+import { paginatedRequest } from '../http/paginated-request'
 import { TimelyAppConfig } from '../types'
 
 export class Reports {
@@ -13,7 +14,11 @@ export class Reports {
             until?: string
         },
     ) {
-        const { data } = await this.http.post(`/${this.config.accountId}/reports/filter`, filter)
+        const data = await paginatedRequest(
+            this.http,
+            `/${this.config.accountId}/reports/filter`,
+            filter,
+        )
         return data
     }
 }
