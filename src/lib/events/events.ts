@@ -1,4 +1,5 @@
 import { AxiosInstance } from 'axios'
+import { paginatedRequest } from '../http/paginated-request'
 import {
     DateString,
     TimelyAppConfig,
@@ -18,7 +19,7 @@ export class Events {
             params.since = startDate
             params.upto = endDate
         }
-        const { data } = await this.http.get(`/${this.config.accountId}/events`, { params })
+        const data = await paginatedRequest(this.http, `/${this.config.accountId}/events`, params)
         return data
     }
 
@@ -29,10 +30,17 @@ export class Events {
     ): Promise<TimelyEvent[]> {
         // Ensure given date range conforms to ISO string format
         const [startDate, endDate] = [start, end].map((s) => this.ensureISOFormat(s))
-        const { data } = await this.http.get(
-            `/${this.config.accountId}/projects/${projectId}/events${
-                start ? `?since=${startDate}` : ''
-            }${end ? `&upto=${endDate}` : ''}`,
+        const params = {} as { since?: string; upto?: string }
+        if (startDate) {
+            params.since = startDate
+        }
+        if (endDate) {
+            params.upto = endDate
+        }
+        const data = await paginatedRequest(
+            this.http,
+            `/${this.config.accountId}/projects/${projectId}/events`,
+            params,
         )
         return data
     }
