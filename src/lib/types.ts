@@ -113,6 +113,7 @@ export interface TimelyUser {
     hide_hourly_rate: boolean
     deleted: boolean
     default_hour_rate: number
+    internal_hour_rate?: number
     role_id: number
     role: {
         id: number
