@@ -1061,7 +1061,7 @@
     prettier "^2.3.0"
     typescript "^4.0.5"
 
-"@pliancy/semantic-release-config-npm@^2.1.0":
+"@pliancy/semantic-release-config-npm@2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@pliancy/semantic-release-config-npm/-/semantic-release-config-npm-2.1.0.tgz#7765d272880a2188366bf08b6cd937e82ef8e497"
   integrity sha512-jgWY3Z0StJdl+mJzcS/1qBJZjuspP/ZDPTk6SWfxsaz1JmEzEYT8USMVHP2jyFPUKWlCSB3OG+YnNaCPcoAgqA==
@@ -5667,7 +5667,7 @@ npm-registry-fetch@^11.0.0:
     minizlib "^2.0.0"
     npm-package-arg "^8.0.0"
 
-npm-run-all@^4.1.5:
+npm-run-all@4.1.5:
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/npm-run-all/-/npm-run-all-4.1.5.tgz#04476202a15ee0e2e214080861bff12a51d98fba"
   integrity sha512-Oo82gJDAVcaMdi3nuoKFavkIHBRVqQ1qvMb+9LHk/cF4P6B2m8aP04hGf7oL6wZ9BuGwX1onlLhpuoofSyoQDQ==
@@ -6680,7 +6680,7 @@ semantic-release@17.4.2:
     signale "^1.2.1"
     yargs "^16.2.0"
 
-semantic-release@^17.4.7:
+semantic-release@17.4.7:
   version "17.4.7"
   resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-17.4.7.tgz#88e1dce7294cc43acc54c4e0a83f582264567206"
   integrity sha512-3Ghu8mKCJgCG3QzE5xphkYWM19lGE3XjFdOXQIKBM2PBpBvgFQ/lXv31oX0+fuN/UjNFO/dqhNs8ATLBhg6zBg==
@@ -7424,7 +7424,7 @@ ts-jest@27.0.5:
     semver "7.x"
     yargs-parser "20.x"
 
-ts-node@^9.1.1:
+ts-node@9.1.1:
   version "9.1.1"
   resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-9.1.1.tgz#51a9a450a3e959401bda5f004a72d54b936d376d"
   integrity sha512-hPlt7ZACERQGf03M253ytLY3dHbGNGrAq9qIHWUY9XHYl1z7wYngSr3OQ5xmui8o2AaxsONxIzjafLUiWBo1Fg==
