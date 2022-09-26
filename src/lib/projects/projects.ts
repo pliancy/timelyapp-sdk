@@ -21,10 +21,10 @@ export class Projects {
         return data
     }
 
-    async getByExternalId(externalId: string): Promise<TimelyProject | undefined> {
+    async getByExternalId(externalId: string): Promise<TimelyProject[]> {
         const projects = await this.getAll()
-        if (!(projects && projects.length)) return undefined
-        return projects.find((e) => e?.external_id === externalId)
+        if (!(projects && projects.length)) return []
+        return projects.filter((e) => e?.external_id === externalId)
     }
 
     async add(project: AddTimelyProject): Promise<TimelyProject> {
