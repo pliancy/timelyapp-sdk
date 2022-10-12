@@ -56,7 +56,7 @@
     "types": "index.d.ts",
     "version": "5.0.0",
     "volta": {
-        "node": "14.17.1",
+        "node": "16.18.0",
         "yarn": "1.22.10"
     }
 }
