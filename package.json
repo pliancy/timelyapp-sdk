@@ -14,7 +14,7 @@
     },
     "description": "SDK for timelyapp.com API",
     "devDependencies": {
-        "@digitalroute/cz-conventional-changelog-for-jira": "6.6.0",
+        "@digitalroute/cz-conventional-changelog-for-jira": "7.4.2",
         "@pliancy/eslint-config-ts": "0.0.5",
         "@pliancy/semantic-release-config-npm": "^2.1.0",
         "@types/jest": "27.0.1",
