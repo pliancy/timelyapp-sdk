@@ -2,7 +2,10 @@ import { AxiosInstance } from 'axios'
 import { AddTimelyLabel, TimelyAppConfig, TimelyLabel } from '../types'
 
 export class Labels {
-    constructor(private readonly http: AxiosInstance, private readonly config: TimelyAppConfig) {}
+    constructor(
+        private readonly http: AxiosInstance,
+        private readonly config: TimelyAppConfig,
+    ) {}
 
     async getAll(): Promise<TimelyLabel[]> {
         const { data } = await this.http.get(`/${this.config.accountId}/labels`)

@@ -2,7 +2,10 @@ import { AxiosInstance } from 'axios'
 import { TimelyAppConfig, TimelyTeam, TimelyUser } from '../types'
 
 export class Teams {
-    constructor(private readonly http: AxiosInstance, private readonly config: TimelyAppConfig) {}
+    constructor(
+        private readonly http: AxiosInstance,
+        private readonly config: TimelyAppConfig,
+    ) {}
 
     async getAll(): Promise<TimelyUser[]> {
         const { data } = await this.http.get(`/${this.config.accountId}/teams`)

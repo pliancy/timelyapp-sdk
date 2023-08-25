@@ -3,7 +3,10 @@ import { paginatedRequest } from '../http/paginated-request'
 import { TimelyAppConfig } from '../types'
 
 export class Reports {
-    constructor(private readonly http: AxiosInstance, private readonly config: TimelyAppConfig) {}
+    constructor(
+        private readonly http: AxiosInstance,
+        private readonly config: TimelyAppConfig,
+    ) {}
 
     async getByExternalId(
         externalId: string,

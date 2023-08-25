@@ -11,7 +11,10 @@ import {
 } from '../types'
 
 export class Users {
-    constructor(private readonly http: AxiosInstance, private readonly config: TimelyAppConfig) {}
+    constructor(
+        private readonly http: AxiosInstance,
+        private readonly config: TimelyAppConfig,
+    ) {}
 
     async getAll(): Promise<TimelyUser[]> {
         const { data } = await this.http.get(`/${this.config.accountId}/users?limit=1000`)

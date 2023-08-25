@@ -9,7 +9,10 @@ import {
 } from '../types'
 
 export class Events {
-    constructor(private readonly http: AxiosInstance, private readonly config: TimelyAppConfig) {}
+    constructor(
+        private readonly http: AxiosInstance,
+        private readonly config: TimelyAppConfig,
+    ) {}
 
     async getAll(start?: DateString, end?: DateString): Promise<TimelyEvent[]> {
         // Ensure given date range conforms to ISO string format
