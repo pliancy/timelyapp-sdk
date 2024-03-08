@@ -10,7 +10,7 @@
         }
     },
     "dependencies": {
-        "axios": "1.4.0"
+        "axios": "1.6.7"
     },
     "description": "SDK for timelyapp.com API",
     "devDependencies": {
