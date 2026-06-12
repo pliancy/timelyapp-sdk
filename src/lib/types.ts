@@ -132,7 +132,7 @@ export interface TimelyLabel {
     children: TimelyLabel[]
 }
 
-export interface TimelyProject {
+export interface TimelyProjectBase {
     id: number
     active: boolean
     account_id: number
@@ -153,12 +153,15 @@ export interface TimelyProject {
     budget_type: string
     hour_rate: number
     hour_rate_in_cents: number
-    budget_progress: number
-    budget_percent: number
     users: TimelyProjectUser[]
     labels: TimelyProjectLabel[]
     label_ids: number[]
     required_label_ids: number[]
+}
+
+export interface TimelyProject extends TimelyProjectBase {
+    budget_progress: number
+    budget_percent: number
     cost: TimelyProjectCost
     estimated_cost: TimelyProjectCost
     duration: TimelyProjectDuration
@@ -168,6 +171,8 @@ export interface TimelyProject {
     unbilled_cost: TimelyProjectCost
     unbilled_duration: TimelyProjectDuration
 }
+
+export type TimelyProjectSummary = TimelyProjectBase
 export interface TimelyProjectDuration {
     hours: number
     minutes: number
