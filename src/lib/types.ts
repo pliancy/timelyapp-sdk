@@ -119,7 +119,6 @@ export interface TimelyUser {
         id: number
         name: string
     }
-    projects?: { project_id: number; hour_rate?: number }[]
 }
 
 export interface TimelyLabel {
@@ -387,7 +386,7 @@ export type AddTimelyClient = OptionalExceptFor<TimelyClient, 'name'>
 export type AddTimelyUser = AddToAllProjects &
     OptionalExceptFor<TimelyUser, 'name' | 'email' | 'role_id'>
 
-export type UpdateTimelyUser = Partial<TimelyUser & AddToAllProjects>
+export type UpdateTimelyUser = Partial<Omit<TimelyUser, 'projects'> & AddToAllProjects>
 
 export interface AddToAllProjects {
     add_to_all_projects?: boolean
