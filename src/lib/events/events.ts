@@ -1,6 +1,7 @@
 import { AxiosInstance } from 'axios'
 import { paginatedRequest } from '../http/paginated-request'
 import {
+    AddTimelyEvent,
     DateString,
     TimelyAppConfig,
     TimelyBulkUpdateEventsReturn,
@@ -73,6 +74,11 @@ export class Events {
         const { data } = await this.http.post(`/${this.config.accountId}/bulk/events`, {
             delete: eventIds,
         })
+        return data
+    }
+
+    async add(event: AddTimelyEvent): Promise<TimelyEvent> {
+        const { data } = await this.http.post(`/${this.config.accountId}/events`, { event })
         return data
     }
 

@@ -10,6 +10,30 @@ describe('Events', () => {
         expect(new Events({} as never, {} as never)).toBeTruthy()
     })
 
+    describe('when creating events', () => {
+        it('creates an event with external_links', async () => {
+            const event = {
+                day: '2026-08-20',
+                hours: 1,
+                minutes: 0,
+                project_id: 1,
+                external_links: [
+                    {
+                        external_id: 'ISSUE-1',
+                        provider_id: 'linear',
+                        provider_type: 'linear',
+                        uri: 'https://linear.app/issue/ISSUE-1',
+                        data: { uri: 'https://linear.app/issue/ISSUE-1' },
+                    },
+                ],
+            }
+            const res = { data: { id: 1, ...event } }
+            jest.spyOn(axiosMock, 'post').mockResolvedValue(res)
+            await expect(events.add(event)).resolves.toEqual(res.data)
+            expect(axiosMock.post).toHaveBeenCalledWith('/accountId/events', { event })
+        })
+    })
+
     describe('when finding events', () => {
         it('finds an event by id', async () => {
             const res = { data: null }
