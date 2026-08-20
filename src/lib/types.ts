@@ -361,7 +361,7 @@ export interface TimelyEvent {
     hour_rate_in_cents: number
     creator_id: number
     updater_id: number
-    external_id: any
+    external_id: string | null
     entry_ids: [any]
     suggestion_id: any
     draft: boolean
@@ -371,6 +371,41 @@ export interface TimelyEvent {
     readonly locked: boolean
     invoice_id: any
     timestamps: any[]
+    external_link_ids: number[]
+    external_links: TimelyEventExternalLink[]
+}
+
+export interface TimelyEventExternalLink {
+    external_id: string
+    provider_id: string
+    provider_type: string
+    uri?: string | null
+    data?: {
+        uri?: string
+        [key: string]: unknown
+    }
+}
+
+export interface AddTimelyEvent {
+    day: string
+    hours?: number
+    minutes?: number
+    seconds?: number
+    project_id?: number
+    user_id?: number
+    user_ids?: number[]
+    note?: string | null
+    estimated?: boolean
+    from?: string | null
+    to?: string | null
+    label_ids?: number[]
+    billed?: boolean
+    billable?: boolean
+    hour_rate?: number
+    external_id?: string | null
+    draft?: boolean
+    forecast_id?: number | null
+    external_links?: TimelyEventExternalLink[]
 }
 
 export interface TimelyBulkUpdateEventsReturn {
